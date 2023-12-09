@@ -97,6 +97,9 @@ dependencies:
     version: 3.22.4
 
 devDependencies:
+  '@types/google-map-react':
+    specifier: ^2.1.10
+    version: 2.1.10
   '@types/node':
     specifier: ^20.9.0
     version: 20.9.0
@@ -1494,6 +1497,12 @@ packages:
     resolution: {integrity: sha512-mSM/iKUk5fDDrEV/e83qY+Cr3I1+Q3qqTuEn++HAWYjEa1+NxZr6CNrcJGf2ZTnq4HoFGC3zaTPZTobCzCFukA==}
     dependencies:
       '@babel/types': 7.23.3
+    dev: true
+
+  /@types/google-map-react@2.1.10:
+    resolution: {integrity: sha512-8/0UllZS7tF08WNBRPQlSJCkETvz3e3sZoPxzDaWkj2iV5dmFSnOKXVtoeKo8dLZSe+RkLn479t1wj6nXmLLSA==}
+    dependencies:
+      '@types/react': 18.2.37
     dev: true
 
   /@types/json-schema@7.0.15:
