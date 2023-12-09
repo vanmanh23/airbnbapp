@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import LanguagesPopover from "./LanguagesPopover";
 import PriceCalculator from "./PriceCalculator";
 import { Room } from "@/apis/rooms";
@@ -12,7 +11,7 @@ interface Props {
 
 export default function RoomDetail({rooms, isLoading}: Props) {
 
-  const {idcurrency} =useParams<{id: string}>();
+  // const {idcurrency} =useParams<{id: string}>();
   if (isLoading) {
     return new Array(20).fill(0).map(() => (
       <div className="group cursor-pointer space-y-1">
