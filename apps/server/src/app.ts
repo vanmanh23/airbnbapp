@@ -8,7 +8,7 @@ import { beachService } from "./modules/beach.service";
 import { framesService } from "./modules/frames.service";
 import { castelsService } from "./modules/castels.service";
 import { surfingsService } from "./modules/surfings.service";
-import {router as rooms} from "./modules/detailroom/rooms.controler";
+import {router as room} from "./modules/detailroom/rooms.controler";
 
 
 const app =new Hono().basePath("/api");
@@ -27,7 +27,7 @@ app.get("categories", (c) => {
     return c.json(categories);
 });
 
-app.route("/rooms", rooms)
+app.route("/room", room)
 
 app.get("/categories/:categoryId/rooms", (c) => {
     const categoryId = c.req.param("categoryId");

@@ -12,8 +12,12 @@ export default function Component() {
 
   const roomQuery = useQuery({
     queryKey: ["rooms", id],
-    queryFn: () => fetchRoom (id)
+    queryFn: () => fetchRoom(id)
   })
+  if(roomQuery.data) {
+    console.log(roomQuery.data);
+    // Rest of the code that depends on roomQuery.data
+  }
   console.log(roomQuery.data)
   return (
     <div>
@@ -23,10 +27,10 @@ export default function Component() {
       </h1>
       <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2">
         {
-          roomQuery.data?.images?.map((room, index) => (
+          roomQuery?.data?.images.map((image, index) => (
             <div key={index}>
               <img
-                src={room}
+                src={image}
                 className={cn({
                   'col-span-2 row-span-2': index === 0,
                   'rounded-s-xl': index === 0,
