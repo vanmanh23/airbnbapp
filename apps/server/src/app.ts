@@ -1,14 +1,14 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { categoriesService } from "./modules/categories.service";
-import { roomsService } from "./modules/rooms.service";
+import { categoriesService } from "./modules/categories/categories.service";
+import { roomsService } from "./modules/detailroom/rooms.service";
 import { cabinsService } from "./modules/cabins.service";
 import { beachService } from "./modules/beach.service";
 import { framesService } from "./modules/frames.service";
 import { castelsService } from "./modules/castels.service";
 import { surfingsService } from "./modules/surfings.service";
-
+import {router as rooms} from "./modules/detailroom/rooms.controler";
 
 
 const app =new Hono().basePath("/api");
@@ -26,6 +26,8 @@ app.get("categories", (c) => {
     const categories = categoriesService.getAll();
     return c.json(categories);
 });
+
+app.route("/rooms", rooms)
 
 app.get("/categories/:categoryId/rooms", (c) => {
     const categoryId = c.req.param("categoryId");
@@ -55,4 +57,6 @@ app.get("/categories/:categoryId/rooms", (c) => {
     }
     return c.json([]);
 })
+
+
 export default app;
