@@ -28,7 +28,6 @@ export default function RoomList({ rooms, isLoading }: Props) {
       key={room.id}
       onClick={() => {
         navigate(`/rooms/:id`, { params: { id: room.id } } )
-        console.log(room)
       }}
     >
       <RoomCard room={room} key={room.id}/>

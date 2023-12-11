@@ -15,10 +15,10 @@ export default function Component() {
     queryFn: () => fetchRoom(id)
   })
   if(roomQuery.data) {
-    console.log(roomQuery.data);
+    // console.log(roomQuery.data);
     // Rest of the code that depends on roomQuery.data
+    console.log("hello",id);
   }
-  console.log(roomQuery.data)
   return (
     <div>
       <h1 className="flex gap-2 text-2xl font-medium">
@@ -60,7 +60,7 @@ export default function Component() {
       </div>
       <div className="flex justify-between mt-10">
         <div className="w-2/3">
-            Hello
+            <p> hello kk</p>
         </div>
         <div className="w-1/3">
           <PriceCalculator />
