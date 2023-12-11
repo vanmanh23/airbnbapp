@@ -1,5 +1,5 @@
 export class roomsService {
-    static getBy() {
+    static getBy(roomId: string) {
       
         return [
             {
