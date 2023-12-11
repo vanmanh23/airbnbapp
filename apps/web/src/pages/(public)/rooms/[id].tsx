@@ -11,7 +11,7 @@ export default function Component() {
   const { id } = useParams("/rooms/:id");
 
   const roomQuery = useQuery({
-    queryKey: ["rooms", id],
+    queryKey: ["room", id],
     queryFn: () => fetchRoom(id)
   })
   if(roomQuery.data) {

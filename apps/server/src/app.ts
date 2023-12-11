@@ -27,14 +27,14 @@ app.get("categories", (c) => {
     return c.json(categories);
 });
 
-app.route("/room", room)
+app.route("/", room)
 
 app.get("/categories/:categoryId/rooms", (c) => {
     const categoryId = c.req.param("categoryId");
-    if(categoryId === "1"){
-    const rooms = roomsService.getBy(categoryId)
-    return c.json(rooms)
-    }
+    // if(categoryId === "1"){
+    // const rooms = roomsService.getBy(categoryId)
+    // return c.json(rooms)
+    // }
     if(categoryId === "2"){
         const cabins = cabinsService.getBy(categoryId)
         return c.json(cabins)
