@@ -27,7 +27,12 @@ app.get("categories", (c) => {
     return c.json(categories);
 });
 
-app.route("/rooms", rooms)
+// app.route("/rooms", rooms)
+app.get("/rooms/:roomId", (c) => {
+    const roomId = c.req.param("roomId");
+    const room = roomsService.getBy(roomId);
+    return c.json(room);
+})
 
 app.get("/categories/:categoryId/rooms", (c) => {
     const categoryId = c.req.param("categoryId");
