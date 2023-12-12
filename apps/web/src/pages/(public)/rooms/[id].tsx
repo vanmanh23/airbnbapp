@@ -14,13 +14,7 @@ export default function Component() {
     queryKey: ["rooms", id],
     queryFn: () => fetchRoom(id)
   })
-  console.log(roomQuery.data)
-  // if(roomQuery.data?.id === "1"){
-  //   console.log(roomQuery.data)
-  // }else{
-  //   console.log("khong co")
-  // }
-
+  console.log(roomQuery.data);
   return (
     <div>
       <h1 className="flex gap-2 text-2xl font-medium">
@@ -32,10 +26,10 @@ export default function Component() {
       </div>
       <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2">
         {/* {
-          roomQuery?.data?.name.map((namee: string, index: number) => (
+          roomQuery.data?.images.map((images: string, index: number) => (
             <div key={index}>
               <img
-                src={image}
+                src={images}
                 className={cn({
                   'col-span-2 row-span-2': index === 0,
                   'rounded-s-xl': index === 0,
@@ -43,7 +37,6 @@ export default function Component() {
                   'rounded-br-xl': index === 4
                 })}
               />
-              <p>{namee}</p>
             </div>
            
           ))
