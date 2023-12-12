@@ -14,8 +14,7 @@ export default function Component() {
     queryKey: ["rooms", id],
     queryFn: () => fetchRoom(id)
   })
-  const mang: string = roomQuery.data?.name || "";
-  console.log(mang)
+  console.log(roomQuery.data)
   // if(roomQuery.data?.id === "1"){
   //   console.log(roomQuery.data)
   // }else{
