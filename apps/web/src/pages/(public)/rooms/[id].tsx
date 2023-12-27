@@ -8,9 +8,11 @@ import { cn } from "@/utils/cn";
 import { Skeleton } from "@/components/ui/skeleton";
 
 
+
 export default function Component() {
   const { id } = useParams("/rooms/:id");
-  
+ 
+  console.log("id la: ", id)
   const roomQuery = useQuery({
     queryKey: ['rooms', id],
     queryFn: () => fetchRoom(id),
@@ -51,7 +53,7 @@ export default function Component() {
         <LanguagesPopover />
         Flower Dam Garden (Flower Dam Academy) 
       </h1>
-      <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2">
+      <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2 h-96">
         {
           roomQuery.data.map(room => (
             room.images.slice(0,5).map((image, index) => (
@@ -63,7 +65,8 @@ export default function Component() {
                   'rounded-s-xl': index === 0,
                   'rounded-tr-xl': index === 2,
                   'rounded-br-xl': index === 4,
-                  'h-full': index === 0 || index === 4 || index === 2 || index === 3
+                  'h-full': index === 0 || index === 4 || index === 2 || index === 3 || index === 1,
+                  'w-full': index === 0 || index === 4 || index === 2 || index === 3 || index === 1
                 })}
               />
 

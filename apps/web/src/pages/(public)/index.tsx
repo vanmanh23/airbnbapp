@@ -38,7 +38,6 @@ export default function Component() {
     queryFn: fetchCategories,
     initialData: [],
   })
-
   const categoryTag = searchParams.get('category_tag') ?? categoriesQuery.data[0]?.id
 
   const roomsQuery = useQuery({

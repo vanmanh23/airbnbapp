@@ -15,9 +15,8 @@ export default function CategoryList({ categories, isLoading }: Props) {
   const categoryTag = searchParams.get('category_tag')
 
   if(isLoading) {
-    return new Array(20).fill(0).map((index) => (
-      <div className="h-13 min-w-[4rem] flex items-center flex-col"
-      key={index}>
+    return new Array(20).fill(0).map(() => (
+      <div className="h-13 min-w-[4rem] flex items-center flex-col">
         <Skeleton className="w-6 h-6"/>
         <Skeleton className="my-2 w-full h-2"/>
       </div>

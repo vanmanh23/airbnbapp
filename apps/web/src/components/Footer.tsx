@@ -44,9 +44,9 @@ export default function Footer() {
         },
     ]
   return (
-    <div className=''>
+    <div className='w-11/12 m-auto'>
 
-      <div className='grid grid-cols-1 md:grid-cols-3'>
+      <div className=' grid grid-cols-1 md:grid-cols-3'>
         {content.map((item, index) => (
             <div key={index}>
                 <h2>{item.title}</h2>
