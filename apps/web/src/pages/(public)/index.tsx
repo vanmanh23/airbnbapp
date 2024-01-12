@@ -9,8 +9,6 @@ import { useQuery } from '@tanstack/react-query';
 import RoomList from './_components/RoomList'
 import { useRef } from 'react'
 
-
-
 export default function Component() {
   const [searchParams] = useSearchParams()
   const categoryListRef = useRef<HTMLDivElement>(null)

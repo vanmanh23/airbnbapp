@@ -1,8 +1,9 @@
 import { AlignJustify, User2 } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import LoginModal from './modals/LoginModal'
-import { Link } from '@/router'
+
 import WinterReleaseModal from './modals/WinterReleaseModal'
+import { Link } from 'react-router-dom'
 
 export default function UserProfilePopover() {
   return (
