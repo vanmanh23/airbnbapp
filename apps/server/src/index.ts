@@ -1,7 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { roomsService } from "./modules/rooms/rooms.service";
 import { serve } from "@hono/node-server";
 import { router as categories }from "./modules/categories/categories.controler";
 import { router as rooms } from "./modules/rooms/rooms.controler";
