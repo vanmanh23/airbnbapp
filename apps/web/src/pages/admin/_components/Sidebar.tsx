@@ -8,7 +8,7 @@ interface SidebarOptions {
 
 export default function Sidebar(toggle: SidebarOptions) {
   const [activeItem, setActiveItem] = useState("Dashboard");
-  const hidden = toggle;
+  const hidden = toggle.toggle;
   const handleItemClick = (item: string) => {
     setActiveItem(item);
   };
@@ -38,6 +38,7 @@ export default function Sidebar(toggle: SidebarOptions) {
       <div className="p-6">
         {features.slice(0, 6).map((feature) => (
           <Link 
+          key={feature.name}
             to={`/admin/${feature.href}`}
             className={`flex flex-row mb-2 gap-4 h-10 text-primary items-center rounded-md duration-75 ${
               activeItem === feature.name ? "bg-primary text-white" : ""
@@ -53,6 +54,7 @@ export default function Sidebar(toggle: SidebarOptions) {
         <hr className="mb-4" />
         {features.slice(6, 10).map((feature) => (
           <Link
+          key={feature.name}
             to={`/${feature.href}`}
             className={`flex flex-row mb-2 gap-4 h-10 text-primary items-center rounded-md duration-75 ${
               activeItem === feature.name ? "bg-primary text-white" : ""
@@ -68,6 +70,7 @@ export default function Sidebar(toggle: SidebarOptions) {
         <hr className="mb-4" />
         {features.slice(10, 12).map((feature) => (
           <Link
+          key={feature.name}
             to={`/${feature.href}`}
             className={`flex flex-row mb-2 gap-4 h-10 text-primary items-center rounded-md duration-75 ${
               activeItem === feature.name ? "bg-primary text-white" : ""

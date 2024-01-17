@@ -1,10 +1,9 @@
 
-
 export default function Component() {
 
   return (
     <div>
-      <h1>hello</h1>
+      <h1>dashboard</h1>
     </div>
   )
 }

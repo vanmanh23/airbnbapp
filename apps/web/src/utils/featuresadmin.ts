@@ -4,7 +4,7 @@ import { BarChart3, Contact, Gauge, Grid2X2, Heart, Inbox, Layers, List, LogOut,
 export const features = [
     {
       name: "Dashboard",
-      href: "dashboard",
+      href: "",
       icon: Gauge,
     },
     {
