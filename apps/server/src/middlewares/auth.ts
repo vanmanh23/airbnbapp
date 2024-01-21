@@ -6,6 +6,9 @@ import jwt from "jsonwebtoken";
 
 export const verifyToken = async (token: string) => {
   try {
+    if(!JWT_SECRET) {
+      throw new Error("JWT_SECRET is not defined");
+    }
     const data = jwt.verify(token, JWT_SECRET) as { userId: string };
 
     const user = await db.user.findUnique({
