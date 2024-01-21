@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es2017",
     "module": "ESNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
+    "outDir": "./public",
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"]
