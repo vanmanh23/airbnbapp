@@ -23,9 +23,6 @@ dependencies:
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
-  error:
-    specifier: ^10.4.0
-    version: 10.4.0
   hono:
     specifier: ^3.11.11
     version: 3.11.11
@@ -1032,10 +1029,6 @@ packages:
     dependencies:
       once: 1.4.0
     dev: true
-
-  /error@10.4.0:
-    resolution: {integrity: sha512-YxIFEJuhgcICugOUvRx5th0UM+ActZ9sjY0QJmeVwsQdvosZ7kYzc9QqS0Da3R5iUmgU5meGIxh0xBeZpMVeLw==}
-    dev: false
 
   /esbuild-android-64@0.14.47:
     resolution: {integrity: sha512-R13Bd9+tqLVFndncMHssZrPWe6/0Kpv2/dt4aA69soX4PRxlzsVpCvoJeFE8sOEoeVEiBkI0myjlkDodXlHa0g==}
