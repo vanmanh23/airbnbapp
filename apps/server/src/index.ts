@@ -4,6 +4,7 @@ import { logger } from "hono/logger";
 import { serve } from "@hono/node-server";
 import { router as categories }from "./modules/categories/categories.controler";
 import { router as rooms } from "./modules/rooms/rooms.controler";
+import { router as auth } from "./modules/auth/auth.controler";
 
 const app = new Hono().basePath("/api");
 
@@ -18,7 +19,7 @@ app.use(
 
 app.route("/categories", categories);
 app.route("/rooms", rooms);
-
+app.route("/", auth)
 app.notFound((c) => {
     return c.json(
       {
