@@ -10,10 +10,10 @@ import { UsersService } from "../users/user.service";
 const ACCESS_TOKEN_EXPIRE_IN = 60 * 60;
 
 export class AuthService {
-    static async signUp(email: string, password: string) {
+    static async signUp(data: User) {
         const user = await db.user.findUnique({
             where: {
-                email
+                email: data.email
             }
         })
         if(user){
@@ -21,11 +21,11 @@ export class AuthService {
         }
 
         const salt = await bcrypt.genSaltSync();
-        const hashPassword = await bcrypt.hash(password, salt);
+        const hashPassword = await bcrypt.hash(data.password, salt);
 
         await db.user.create({
             data: {
-                email,
+                ...data,
                 password: hashPassword,
             }
         })

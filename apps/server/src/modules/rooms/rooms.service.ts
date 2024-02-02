@@ -22,7 +22,8 @@ export class roomsService {
             const room = await db.room.create({
                 data: {
                     ...data,
-                    categoryId: categoryId
+                    categoryId: categoryId,
+                    // userId: category?.userId
                 }
             });
             return room;

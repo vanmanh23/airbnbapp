@@ -12,10 +12,12 @@ model User{
   id        String @id @default(cuid())
   email     String @unique
   password  String
-  fullname  String?
+  firstName  String?
+  lastName  String?
   avatar    String?
-  phone     String?
+  phoneNumber     String?
   age       String?
+  address   String?
   Room Room[]
 
   @@map("users")
