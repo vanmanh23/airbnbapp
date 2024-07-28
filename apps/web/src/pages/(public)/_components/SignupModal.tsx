@@ -22,6 +22,7 @@ export default function SignupModal() {
         ...register
       })
       console.log(res.data)
+      toast.success("Signup successfully!")
     }catch (error){
       if(error instanceof Error){
         toast.error(error.message)

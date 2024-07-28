@@ -22,11 +22,6 @@ export default function SignupForm({onSubmit}: Props) {
     
         resolver: zodResolver(signUpSchema),
       });
-      // const onSubmit = async (data: signUpInputs) => {
-      //   console.log({
-      //     ...data,
-      //   });
-      // };
 
   return (
     <div>

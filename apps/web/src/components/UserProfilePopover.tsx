@@ -4,22 +4,23 @@ import LoginModal from './modals/LoginModal'
 
 import WinterReleaseModal from './modals/WinterReleaseModal'
 import { Link } from 'react-router-dom'
+import SignupModal from '@/pages/(public)/_components/SignupModal'
 
 export default function UserProfilePopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className="flex items-center gap-3 rounded-full px-4 py-1 shadow-xl">
-          <AlignJustify className="w-6" />
-          <div className="flex h-8 w-8 items-end justify-center rounded-full bg-gray-400 text-white">
-            <User2 />
+        <button className="flex items-center justify-center gap-3 h-12 rounded-full px-3 border-solid border-2 shadow-xl">
+          <AlignJustify className="w-4" />
+          <div className="flex h-8 w-8 items-end justify-center rounded-full bg-secondary-color text-white">
+            <User2 color='white'  className='text-black'/>
           </div>
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-60 text-sm" align="end">
         <WinterReleaseModal />
         <hr />
-        <LoginModal title="Sign up" />
+        <SignupModal />
         <LoginModal title="Log in" />
         <hr />
         <Link to="/giftcards">

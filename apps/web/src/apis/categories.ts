@@ -9,5 +9,5 @@ export interface Category {
 export const fetchCategories = async (): Promise<Category[]> => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/categories`)
   const categories = await res.json()
-  return categories
+  return categories.data
 }

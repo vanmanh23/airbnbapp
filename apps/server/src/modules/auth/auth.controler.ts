@@ -9,6 +9,7 @@ router
 .post("/signup", zValidator( "json", signUpDto) , async (c) => {
     const {...data } = await c.req.json();
     await AuthService.signUp(data);
+    console.log(data);
     return c.json({message: "create account successfully"});
 })
 .post("/signin", zValidator( "json", signInDto) , async (c) => {

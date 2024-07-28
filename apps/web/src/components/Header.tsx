@@ -4,8 +4,8 @@ import UserProfilePopover from './UserProfilePopover'
 import LanguageModal from './modals/LanguageModal'
 
 interface HeaderProps {
-  className?: string
-  hasSearch?: boolean
+  className?: string,
+  hasSearch: boolean
 }
 
 export default function Header({ className, hasSearch}: HeaderProps) {
@@ -24,7 +24,7 @@ export default function Header({ className, hasSearch}: HeaderProps) {
           ></path>
         </svg>
       </Link>
-      { hasSearch && (
+      { hasSearch ? (
         <div className="flex rounded-full border  px-2 py-2 shadow-xl">
           <button className="border-r px-4"> Anywhere </button>
           <button className="border-r px-4"> Any week </button>
@@ -33,9 +33,14 @@ export default function Header({ className, hasSearch}: HeaderProps) {
             <Search className="w-5" />
           </button>
         </div>
-      )}
+      )
+      :
+      <div>
+        <p>hello</p>
+      </div>
+      }
 
-      <div className="flex gap-3 h-10">
+      <div className="flex items-center gap-3 h-10">
         <Link to="/host/homes" className="px-3  text-sm flex items-center rounded-full hover:bg-gray-100">
           Airbnb your home
         </Link>
