@@ -2,6 +2,9 @@ import { Search } from 'lucide-react'
 import { Link } from '../router'
 import UserProfilePopover from './UserProfilePopover'
 import LanguageModal from './modals/LanguageModal'
+import SearchAdvance from './SearchAdvance'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface HeaderProps {
   className?: string,
@@ -9,9 +12,11 @@ interface HeaderProps {
 }
 
 export default function Header({ className, hasSearch}: HeaderProps) {
-  console.log(`Hello ${hasSearch} again!`)
+  const [searchSelected, setSearchSelected] = useState<string>("");
+  const { t } = useTranslation();
   return (
-    <header className={`flex h-20 items-center justify-between ${className}`}>
+    <header className={`sticky top-0 bg-white z-30 flex flex-col py-5 ${className}`}>
+      <div className={`flex justify-between `}>
       <Link to="/">
         <svg width="102" height="32" className="text-primary text-main-color">
           <path
@@ -28,7 +33,7 @@ export default function Header({ className, hasSearch}: HeaderProps) {
         <div className="flex rounded-full border  px-2 py-2 shadow-xl">
           <button className="border-r px-4"> Anywhere </button>
           <button className="border-r px-4"> Any week </button>
-          <button className="px-4"> Any week </button>
+          <button className="px-4"> Add guests </button>
           <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
             <Search className="w-5" />
           </button>
@@ -36,18 +41,29 @@ export default function Header({ className, hasSearch}: HeaderProps) {
       )
       :
       <div>
-        <p>hello</p>
+        <div className="flex flex-row gap-6 mb-7">
+            <button className={`text-lg cusor-pointer font-normal ${searchSelected === "stays" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("stays")}>{t('where')}</button>
+            <button className={`text-lg cursor-pointer font-normal ${searchSelected === "experiences" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("experiences")}>{t('Experiences')}</button>
+        </div>
       </div>
       }
 
       <div className="flex items-center gap-3 h-10">
-        <Link to="/host/homes" className="px-3  text-sm flex items-center rounded-full hover:bg-gray-100">
+        <Link to="/host/homes" className="px-3 text-base font-semibold flex items-center rounded-full hover:bg-gray-100">
           Airbnb your home
         </Link>
         <div className="flex items-center rounded-full p-3 hover:bg-gray-100">
           <LanguageModal />
         </div>
         <UserProfilePopover/>
+      </div>
+      </div>
+      <div className='transition ease-in-out'>
+        {
+          !hasSearch && <div>
+            <SearchAdvance searchOptions={searchSelected}/>
+          </div>
+        }
       </div>
     </header>
   )

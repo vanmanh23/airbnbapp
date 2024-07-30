@@ -2,14 +2,13 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom'
-
+import debounce from 'lodash.debounce';
 
 export default function Component() {
   const [isOneTwelfthScrolled, setIsOneTwelfthScrolled] = useState(false);
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = debounce(() => {
       const scrollTop = window.scrollY;
-      // const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
 
       if (scrollTop >= documentHeight / 12) {
@@ -17,13 +16,12 @@ export default function Component() {
       } else {
         setIsOneTwelfthScrolled(false);
       }
-    };
+    }, 100); // Chỉ gọi hàm sau 100ms kể từ lần cuối cùng
 
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      handleScroll.cancel(); // Hủy bỏ debounce nếu component bị hủy
     };
   }, []);
   console.log("isOneTwelfthScrolled: ", isOneTwelfthScrolled)
