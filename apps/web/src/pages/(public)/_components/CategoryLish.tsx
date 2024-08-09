@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 interface Props {
   categories: Category[]
-  isLoading: boolean
+  isLoading?: boolean
 }
 
 export default function CategoryList({ categories, isLoading }: Props) {
@@ -31,7 +31,7 @@ export default function CategoryList({ categories, isLoading }: Props) {
     >
       <img
         src={category.icon}
-        alt={category.name}
+        alt={category.title}
         className={cn('h-6 w-fit opacity-70 group-hover:opacity-100', {
           'opacity-100': categoryTag === category.id
         })}
@@ -41,7 +41,7 @@ export default function CategoryList({ categories, isLoading }: Props) {
           'text-black': categoryTag === category.id
         })}
       >
-        {category.name}
+        {category.title}
       </span>
       <hr
         className={cn('invisible h-1 w-full bg-gray-300 group-hover:visible', {

@@ -1,16 +1,18 @@
-import { useSearchParams } from 'react-router-dom'
+// import { useSearchParams } from 'react-router-dom'
 import CategoryList from './_components/CategoryLish'
 import { Button } from '@/components/ui/button'
-import { fetchRooms } from '@/apis/rooms'
+// import { fetchRooms } from '@/apis/rooms'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import FilterModal from './_components/FilterModal'
-import { fetchCategories } from '@/apis/categories'
-import { useQuery } from '@tanstack/react-query';
+// import { fetchCategories } from '@/apis/categories'
+// import { useQuery } from '@tanstack/react-query';
 import RoomList from './_components/RoomList'
-import { useRef } from 'react'
+import { useRef } from 'react';
+import  { Categorydata }  from '@/data/categorydata';
+import { Roomsdata } from '@/data/roomdata'
 
 export default function Component() {
-  const [searchParams] = useSearchParams()
+  // const [searchParams] = useSearchParams()
   const categoryListRef = useRef<HTMLDivElement>(null)
 
   function onRightClick() {
@@ -31,18 +33,18 @@ export default function Component() {
     })
   }
 
-  const categoriesQuery = useQuery({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
-    initialData: [],
-  })
-  const categoryTag = searchParams.get('category_tag') ?? categoriesQuery.data[0]?.id
+  // const categoriesQuery = useQuery({
+  //   queryKey: ['categories'],
+  //   queryFn: fetchCategories,
+  //   initialData: [],
+  // })
+  // const categoryTag = searchParams.get('category_tag') ?? categoriesQuery.data[0]?.id
 
-  const roomsQuery = useQuery({
-    queryKey: ['rooms', categoryTag],
-    queryFn: ({ queryKey }) => fetchRooms(queryKey[1]),
-    initialData: []
-  })
+  // const roomsQuery = useQuery({
+  //   queryKey: ['rooms', categoryTag],
+  //   queryFn: ({ queryKey }) => fetchRooms(queryKey[1]),
+  //   initialData: []
+  // })
 
 
   return (
@@ -55,7 +57,8 @@ export default function Component() {
           <ChevronLeft />
         </div>
         <div ref={categoryListRef} className="no-scrollbar flex w-4/5 gap-8 overflow-x-auto">
-          <CategoryList categories={categoriesQuery.data} isLoading={categoriesQuery.isFetching} />
+          {/* <CategoryList categories={categoriesQuery.data} isLoading={categoriesQuery.isFetching} /> */}
+          <CategoryList categories={Categorydata} />
         </div>
         <div
           onClick={onRightClick}
@@ -67,7 +70,8 @@ export default function Component() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
-        <RoomList rooms={roomsQuery.data} isLoading={roomsQuery.isFetching}/>
+        {/* <RoomList rooms={roomsQuery.data} isLoading={roomsQuery.isFetching}/> */}
+        <RoomList rooms={Roomsdata} />
       </div>
       <div className="mt-14 flex flex-col items-center">
         <h2 className="text-xl font-bold"> Continue exploring campers </h2>
