@@ -19,10 +19,20 @@ module.exports = {
       scale: {
         "300": "3"
       },
+      border: {
+        DEFAULT: "1px",
+      },
+      height: {
+        "150": "600px", 
+      },
+      width: {
+        "180": "720px",
+      },
       colors: {
         "main-color": "#FF385C",
         "color-host": "#e51e4f",
         "secondary-color": "#6a6a6a",
+        "button-color": "#222222",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -13,6 +13,8 @@ export const Roomsdata = [
                 'https://a0.muscache.com/im/pictures/e189829e-68b7-4339-893b-f71cd8c5a32c.jpg?im_w=720',
                 'https://a0.muscache.com/im/pictures/6414910b-57a2-4394-9286-c71cfd469e55.jpg?im_w=720',
                 'https://a0.muscache.com/im/pictures/938daa91-8f16-40d9-a09a-d97ce91e0d93.jpg?im_w=720',
+                'https://a0.muscache.com/im/pictures/miso/Hosting-824254092645253914/original/5b187a60-0fb3-405b-abaa-d65aad7529b2.jpeg?im_w=720',
+                'https://a0.muscache.com/im/pictures/miso/Hosting-824254092645253914/original/3a2fa542-3b12-44a5-b104-336a8cdbcc24.jpeg?im_w=720'
         ]
     },
     {

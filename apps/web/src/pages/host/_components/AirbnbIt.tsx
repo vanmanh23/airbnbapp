@@ -4,6 +4,7 @@ import { formatNumber } from '@/utils/number'
 import { useState } from 'react'
 import FlipNumbers from 'react-flip-numbers'
 import LearnHowEstimateModal from './LearnHowEstimateModal'
+import ChooseAddress from './ChooseAddress'
 
 export default function AirbnbIt() {
   const [sliderValue, setSliderValue] = useState([1])
@@ -11,16 +12,16 @@ export default function AirbnbIt() {
 
   return (
     <>
-      <h2 className="text-4xl font-bold text-primary">Airbnb it.</h2>
-      <p className="mb-6 text-4xl  font-bold">You could earn</p>
+      <h2 className="text-5xl font-semibold text-primary">Airbnb it.</h2>
+      <p className="mb-6 text-5xl  font-semibold">You could earn</p>
       <p className="text-5xl font-bold">
         <FlipNumbers
-          height={48}
+          height={53}
           width={40}
           color="black"
           play
           numberStyle={{
-            fontSize: 48,
+            fontSize: 53,
             fontWeight: 700
           }}
           numbers={formatNumber.format(sliderValue[0] * 48)}
@@ -50,6 +51,9 @@ export default function AirbnbIt() {
         }}
       />
       <LearnHowEstimateModal />
+      <div className='mt-10'>
+        <ChooseAddress />
+      </div>
     </>
   )
 }

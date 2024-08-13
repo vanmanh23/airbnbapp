@@ -110,6 +110,9 @@ dependencies:
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.3.5)
+  update-browserslist-db:
+    specifier: ^1.1.0
+    version: 1.1.0(browserslist@4.23.3)
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -125,31 +128,31 @@ devDependencies:
     specifier: ^20.9.0
     version: 20.9.0
   '@types/react':
-    specifier: ^18.2.15
+    specifier: ^18.2.37
     version: 18.2.37
   '@types/react-dom':
-    specifier: ^18.2.7
+    specifier: ^18.2.15
     version: 18.2.15
   '@typescript-eslint/eslint-plugin':
-    specifier: ^6.0.0
+    specifier: ^6.10.0
     version: 6.10.0(@typescript-eslint/parser@6.10.0)(eslint@8.53.0)(typescript@5.2.2)
   '@typescript-eslint/parser':
-    specifier: ^6.0.0
+    specifier: ^6.10.0
     version: 6.10.0(eslint@8.53.0)(typescript@5.2.2)
   '@vitejs/plugin-react':
-    specifier: ^4.0.3
+    specifier: ^4.1.1
     version: 4.1.1(vite@4.5.0)
   autoprefixer:
     specifier: ^10.4.16
     version: 10.4.16(postcss@8.4.31)
   eslint:
-    specifier: ^8.45.0
+    specifier: ^8.53.0
     version: 8.53.0
   eslint-plugin-react-hooks:
     specifier: ^4.6.0
     version: 4.6.0(eslint@8.53.0)
   eslint-plugin-react-refresh:
-    specifier: ^0.4.3
+    specifier: ^0.4.4
     version: 0.4.4(eslint@8.53.0)
   postcss:
     specifier: ^8.4.31
@@ -158,10 +161,10 @@ devDependencies:
     specifier: ^3.3.5
     version: 3.3.5
   typescript:
-    specifier: ^5.0.2
+    specifier: ^5.2.2
     version: 5.2.2
   vite:
-    specifier: ^4.4.5
+    specifier: ^4.5.0
     version: 4.5.0(@types/node@20.9.0)
 
 packages:
@@ -1808,7 +1811,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001561
+      caniuse-lite: 1.0.30001651
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1868,11 +1871,22 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001561
+      caniuse-lite: 1.0.30001651
       electron-to-chromium: 1.4.580
       node-releases: 2.0.13
-      update-browserslist-db: 1.0.13(browserslist@4.22.1)
+      update-browserslist-db: 1.1.0(browserslist@4.22.1)
     dev: true
+
+  /browserslist@4.23.3:
+    resolution: {integrity: sha512-btwCFJVjI4YWDNfau8RhZ+B1Q/VLoUITrm3RlP6y1tYGWIOa+InuYiRGXUBXo8nA1qKmHMyLB/iVQg5TT4eFoA==}
+    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
+    hasBin: true
+    dependencies:
+      caniuse-lite: 1.0.30001651
+      electron-to-chromium: 1.5.6
+      node-releases: 2.0.18
+      update-browserslist-db: 1.1.0(browserslist@4.23.3)
+    dev: false
 
   /callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -1883,9 +1897,8 @@ packages:
     resolution: {integrity: sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==}
     engines: {node: '>= 6'}
 
-  /caniuse-lite@1.0.30001561:
-    resolution: {integrity: sha512-NTt0DNoKe958Q0BE0j0c1V9jbUzhBxHIEJy7asmGrpE0yG63KTV7PLHPnK2E1O9RsQrQ081I3NLuXGS6zht3cw==}
-    dev: true
+  /caniuse-lite@1.0.30001651:
+    resolution: {integrity: sha512-9Cf+Xv1jJNe1xPZLGuUXLNkE1BoDkqRqYyFJ9TDYSqhduqA4hu4oR9HluGoWYQC/aj8WHjsGVV+bwkh0+tegRg==}
 
   /chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -2049,6 +2062,10 @@ packages:
     resolution: {integrity: sha512-T5q3pjQon853xxxHUq3ZP68ZpvJHuSMY2+BZaW3QzjS4HvNuvsMmZ/+lU+nCrftre1jFZ+OSlExynXWBihnXzw==}
     dev: true
 
+  /electron-to-chromium@1.5.6:
+    resolution: {integrity: sha512-jwXWsM5RPf6j9dPYzaorcBSUg6AiqocPEyMpkchkvntaH9HGfOOMZwxMJjDY/XEs3T5dM7uyH1VhRMkqUU9qVw==}
+    dev: false
+
   /esbuild@0.18.20:
     resolution: {integrity: sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==}
     engines: {node: '>=12'}
@@ -2078,10 +2095,9 @@ packages:
       '@esbuild/win32-ia32': 0.18.20
       '@esbuild/win32-x64': 0.18.20
 
-  /escalade@3.1.1:
-    resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
+  /escalade@3.1.2:
+    resolution: {integrity: sha512-ErCHMCae19vR8vQGe50xIsVomy19rg6gFu3+r3jkEO46suLMWBksvVyoGgQV+jOfl84ZSOSlmv6Gxa89PmTGmA==}
     engines: {node: '>=6'}
-    dev: true
 
   /escape-string-regexp@1.0.5:
     resolution: {integrity: sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg==}
@@ -2690,6 +2706,10 @@ packages:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
     dev: true
 
+  /node-releases@2.0.18:
+    resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
+    dev: false
+
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
@@ -2773,6 +2793,9 @@ packages:
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+
+  /picocolors@1.0.1:
+    resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -3324,16 +3347,27 @@ packages:
       detect-node: 2.1.0
     dev: false
 
-  /update-browserslist-db@1.0.13(browserslist@4.22.1):
-    resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
+  /update-browserslist-db@1.1.0(browserslist@4.22.1):
+    resolution: {integrity: sha512-EdRAaAyk2cUE1wOf2DkEhzxqOQvFOoRJFNS6NeyJ01Gp2beMRpBAINjM2iDXE3KCuKhwnvHIQCJm6ThL2Z+HzQ==}
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
     dependencies:
       browserslist: 4.22.1
-      escalade: 3.1.1
-      picocolors: 1.0.0
+      escalade: 3.1.2
+      picocolors: 1.0.1
     dev: true
+
+  /update-browserslist-db@1.1.0(browserslist@4.23.3):
+    resolution: {integrity: sha512-EdRAaAyk2cUE1wOf2DkEhzxqOQvFOoRJFNS6NeyJ01Gp2beMRpBAINjM2iDXE3KCuKhwnvHIQCJm6ThL2Z+HzQ==}
+    hasBin: true
+    peerDependencies:
+      browserslist: '>= 4.21.0'
+    dependencies:
+      browserslist: 4.23.3
+      escalade: 3.1.2
+      picocolors: 1.0.1
+    dev: false
 
   /uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
