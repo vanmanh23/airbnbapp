@@ -40,7 +40,7 @@ export default function Header({ className, hasSearch}: HeaderProps) {
         </div>
       )
       :
-      <div>
+      <div className="md:inline-block hidden">
         <div className="flex flex-row gap-6 mb-7">
             <button className={`text-lg cusor-pointer font-normal ${searchSelected === "stays" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("stays")}>{t('where')}</button>
             <button className={`text-lg cursor-pointer font-normal ${searchSelected === "experiences" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("experiences")}>{t('Experiences')}</button>
@@ -49,7 +49,7 @@ export default function Header({ className, hasSearch}: HeaderProps) {
       }
 
       <div className="flex items-center gap-3 h-10">
-        <Link to="/host/homes" className="px-3 text-base font-semibold flex items-center rounded-full hover:bg-gray-100">
+        <Link to="/host/homes" className="px-3 text-base font-semibold flex items-center rounded-full hover:bg-gray-100 md:inline-block hidden">
           Airbnb your home
         </Link>
         <div className="flex items-center rounded-full p-3 hover:bg-gray-100">
@@ -58,7 +58,7 @@ export default function Header({ className, hasSearch}: HeaderProps) {
         <UserProfilePopover/>
       </div>
       </div>
-      <div className='transition ease-in-out'>
+      <div className='transition ease-in-out hidden md:inline-block'>
         {
           !hasSearch && <div>
             <SearchAdvance searchOptions={searchSelected}/>
