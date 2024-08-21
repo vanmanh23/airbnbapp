@@ -1,15 +1,12 @@
-// import { useSearchParams } from 'react-router-dom'
 import CategoryList from './_components/CategoryLish'
 import { Button } from '@/components/ui/button'
-// import { fetchRooms } from '@/apis/rooms'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import FilterModal from './_components/FilterModal'
-// import { fetchCategories } from '@/apis/categories'
-// import { useQuery } from '@tanstack/react-query';
 import RoomList from './_components/RoomList'
 import { useRef } from 'react';
-import  { Categorydata }  from '@/data/categorydata';
 import { Roomsdata } from '@/data/roomdata'
+import { fetchCategories } from '@/apis/categories'
+import { useQuery } from '@tanstack/react-query'
 
 export default function Component() {
   // const [searchParams] = useSearchParams()
@@ -32,7 +29,12 @@ export default function Component() {
       left: rect.width * -1
     })
   }
-
+  const categoriesQuery = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+    initialData: [],
+  })
+  console.log('useQuery: ',{data: categoriesQuery.data, isFetching: categoriesQuery.isFetching})
   // const categoriesQuery = useQuery({
   //   queryKey: ['categories'],
   //   queryFn: fetchCategories,
@@ -46,7 +48,6 @@ export default function Component() {
   //   initialData: []
   // })
 
-
   return (
     <>
       <div className="mb-4 flex ">
@@ -58,7 +59,7 @@ export default function Component() {
         </div>
         <div ref={categoryListRef} className="no-scrollbar flex w-4/5 gap-8 overflow-x-auto">
           {/* <CategoryList categories={categoriesQuery.data} isLoading={categoriesQuery.isFetching} /> */}
-          <CategoryList categories={Categorydata} />
+          <CategoryList categories={categoriesQuery.data} isLoading={categoriesQuery.isFetching}/>
         </div>
         <div
           onClick={onRightClick}

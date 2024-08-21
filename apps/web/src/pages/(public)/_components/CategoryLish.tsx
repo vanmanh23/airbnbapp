@@ -7,13 +7,12 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 interface Props {
   categories: Category[]
-  isLoading?: boolean
+  isLoading: boolean
 }
 
 export default function CategoryList({ categories, isLoading }: Props) {
   const [searchParams] = useSearchParams()
   const categoryTag = searchParams.get('category_tag')
-
   if(isLoading) {
     return new Array(20).fill(0).map(() => (
       <div className="h-13 min-w-[4rem] flex items-center flex-col">
@@ -33,19 +32,19 @@ export default function CategoryList({ categories, isLoading }: Props) {
         src={category.icon}
         alt={category.title}
         className={cn('h-6 w-fit opacity-70 group-hover:opacity-100', {
-          'opacity-100': categoryTag === category.id
+          'opacity-100': categoryTag === String(category.id)
         })}
       />
       <span
         className={cn('my-2 text-xs text-gray-500 group-hover:text-black', {
-          'text-black': categoryTag === category.id
+          'text-black': categoryTag === String(category.id)
         })}
       >
         {category.title}
       </span>
       <hr
         className={cn('invisible h-1 w-full bg-gray-300 group-hover:visible', {
-          'visible bg-black': categoryTag === category.id
+          'visible bg-black': categoryTag === String(category.id)
         })}
       />
     </Link>
