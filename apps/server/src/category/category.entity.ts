@@ -13,4 +13,5 @@ export class Category {
   title: string;
   @OneToMany(() => Rooms, (Rooms) => Rooms.id, { onDelete: 'CASCADE' })
   rooms: Rooms;
+  // check commend
 }
