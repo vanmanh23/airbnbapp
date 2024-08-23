@@ -1,6 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
+import { CategoryDto } from './dto/category.dto';
 
 @Controller('category')
 export class CategoryController {
@@ -13,5 +14,32 @@ export class CategoryController {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  @Get(':title')
+  async getByTitle(@Param('title') title: string): Promise<Category> {
+    try {
+      return this.categoryService.getByTitle(title);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  @Get(':id')
+  async removeById(@Param('id') id: number): Promise<void> {
+    try {
+      await this.categoryService.remove(id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  @Put(':id')
+  async updateItem(
+    @Body() categoryupdate: CategoryDto,
+    @Param('id') id: number,
+  ): Promise<Category> {
+    const oldcategory = await this.categoryService.getById(id);
+    return await this.categoryService.update(oldcategory, categoryupdate);
   }
 }

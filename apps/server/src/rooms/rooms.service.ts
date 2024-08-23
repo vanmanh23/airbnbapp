@@ -11,19 +11,11 @@ export class RoomsService {
   async getAll(): Promise<Rooms[]> {
     return await this.roomsRepository.find();
   }
+  async getRoomById(id: number): Promise<Rooms> {
+    try {
+      return await this.roomsRepository.findOneBy({ id });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
-
-// @Injectable()
-// export class CategoryService {
-//   constructor(
-//     @InjectRepository(Category)
-//     private categoryRepository: Repository<Category>,
-//   ) {}
-
-//   async getAll(): Promise<Category[]> {
-//     return await this.categoryRepository.find();
-//   }
-//   async getByTitle(title: string): Promise<Category> {
-//     return await this.categoryRepository.findOneBy({ title });
-//   }
-// }
