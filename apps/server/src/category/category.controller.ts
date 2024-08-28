@@ -2,10 +2,15 @@ import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 import { CategoryDto } from './dto/category.dto';
+import { RoomsService } from 'src/rooms/rooms.service';
+import { Rooms } from 'src/rooms/rooms.entity';
 
-@Controller('category')
+@Controller('categories')
 export class CategoryController {
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private categoryService: CategoryService,
+    private roomService: RoomsService,
+  ) {}
 
   @Get()
   async GetAll(): Promise<Category[]> {
@@ -34,6 +39,10 @@ export class CategoryController {
     }
   }
 
+  @Get('rooms/:id')
+  getRoomsCategory(@Param('id') id: number) {
+    return this.categoryService.getAllRoomsOfCategory(id);
+  }
   @Put(':id')
   async updateItem(
     @Body() categoryupdate: CategoryDto,
@@ -41,5 +50,9 @@ export class CategoryController {
   ): Promise<Category> {
     const oldcategory = await this.categoryService.getById(id);
     return await this.categoryService.update(oldcategory, categoryupdate);
+  }
+  @Get('/allrooms')
+  async getRooms(): Promise<Rooms[]> {
+    return await this.roomService.getAllRoomsWithDetail();
   }
 }

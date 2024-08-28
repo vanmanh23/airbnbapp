@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { RoomImagesService } from './room-images.service';
 import { RoomImage } from './room-images.entity';
 
@@ -9,5 +9,12 @@ export class RoomImagesController {
   @Get()
   async findAll(): Promise<RoomImage[]> {
     return this.roomImagesService.findAll();
+  }
+  @Post('/newimage/:id')
+  async create(
+    @Body('imageUrls') imageUrls: string[],
+    @Param('id') id: number,
+  ): Promise<void> {
+    await this.roomImagesService.create(imageUrls, id);
   }
 }

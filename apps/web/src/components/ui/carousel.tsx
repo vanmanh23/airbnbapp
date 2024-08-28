@@ -4,7 +4,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface CarouselProps {
-  images: string[]
+  images: [
+    id: number,
+    imageUrl: string
+  ]
   loop?: boolean
   autoplay?: boolean
   autoplayDelay?: number
@@ -80,7 +83,7 @@ export default function Carousel({
               right: `${i * 100}%`
             }}
           >
-            <img src={image} className={cn('w-full', imgClassName)} />
+            <img src={image.imageUrl} className={cn('w-full', imgClassName)} />
           </m.div>
         </LazyMotion>
       ))}

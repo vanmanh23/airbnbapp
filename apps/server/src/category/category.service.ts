@@ -48,4 +48,10 @@ export class CategoryService {
   async remove(id: number): Promise<void> {
     await this.categoryRepository.delete(id);
   }
+  getAllRoomsOfCategory(id: number) {
+    return this.categoryRepository.find({
+      where: { id },
+      relations: ['rooms'],
+    });
+  }
 }

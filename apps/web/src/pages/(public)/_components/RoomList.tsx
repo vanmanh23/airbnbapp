@@ -6,7 +6,7 @@ import RoomCard from './RoomCard'
 
 interface Props {
   rooms: Room[]
-  isLoading?: boolean
+  isLoading: boolean
 }
 
 export default function RoomList({ rooms, isLoading }: Props) {

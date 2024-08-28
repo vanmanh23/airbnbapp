@@ -3,15 +3,29 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import FilterModal from './_components/FilterModal'
 import RoomList from './_components/RoomList'
-import { useRef } from 'react';
-import { Roomsdata } from '@/data/roomdata'
-import { fetchCategories } from '@/apis/categories'
+import { useEffect, useRef, useState } from 'react';
+// import { Roomsdata } from '@/data/roomdata'
+import { fetchCategories, fetchRoomsWithCategory } from '@/apis/categories'
 import { useQuery } from '@tanstack/react-query'
+import { Room } from '@/apis/rooms'
 
 export default function Component() {
   // const [searchParams] = useSearchParams()
   const categoryListRef = useRef<HTMLDivElement>(null)
+  const [roomdata, setRoomdata] = useState<Room[]>([])
 
+  useEffect(() => {
+    try {
+      const fetchdata = async () => {
+        const rooms = await fetchRoomsWithCategory()
+        setRoomdata(rooms)
+      }
+      fetchdata()
+    } catch (error) {
+      console.log('get rooms category', error)
+    }
+  }, [])
+  console.log('roomdata: ', roomdata)
   function onRightClick() {
     if (!categoryListRef.current) return
     const rect = categoryListRef.current.getBoundingClientRect()
@@ -32,6 +46,11 @@ export default function Component() {
   const categoriesQuery = useQuery({
     queryKey: ['categories'],
     queryFn: fetchCategories,
+    initialData: [],
+  })
+  const roomsQuery = useQuery({
+    queryKey: ['rooms'],
+    queryFn: () => fetchRoomsWithCategory(),
     initialData: [],
   })
   console.log('useQuery: ',{data: categoriesQuery.data, isFetching: categoriesQuery.isFetching})
@@ -72,7 +91,7 @@ export default function Component() {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
         {/* <RoomList rooms={roomsQuery.data} isLoading={roomsQuery.isFetching}/> */}
-        <RoomList rooms={Roomsdata} />
+        <RoomList rooms={roomsQuery.data} isLoading={roomsQuery.isFetching} />
       </div>
       <div className="mt-14 flex flex-col items-center">
         <h2 className="text-xl font-bold"> Continue exploring campers </h2>

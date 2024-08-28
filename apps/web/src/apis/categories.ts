@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Room } from './rooms'
 
 export interface Category {
   id: number
@@ -7,7 +8,12 @@ export interface Category {
 }
 
 export const fetchCategories = async (): Promise<Category[]> => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/category`);
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/categories`);
   const categories = await res.data;
   return categories;
+}
+export const fetchRoomsWithCategory = async (): Promise<Room[]> => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/rooms/all`);
+  const rooms = await res.data;
+  return rooms;
 }

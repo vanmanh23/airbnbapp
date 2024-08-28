@@ -14,10 +14,6 @@ import { Injectable } from '@nestjs/common';
 export class Rooms {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @ManyToOne(() => Category, (category) => category.rooms)
-  category: Category;
-
   @Column({ length: 50 })
   name: string;
 
@@ -29,6 +25,8 @@ export class Rooms {
 
   @Column({ length: 50, nullable: true })
   distance: string;
+  @ManyToOne(() => Category, (category) => category.rooms)
+  category: Category;
 
   @OneToMany(() => RoomImage, (roomImage) => roomImage.room)
   images: RoomImage[];
