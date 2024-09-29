@@ -13,6 +13,7 @@ interface HeaderProps {
 
 export default function Header({ className, hasSearch}: HeaderProps) {
   const [searchSelected, setSearchSelected] = useState<string>("");
+
   const { t } = useTranslation();
   return (
     <header className={`sticky top-0 bg-white z-30 flex flex-col py-5 ${className}`}>

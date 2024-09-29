@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
@@ -28,6 +29,10 @@ export class UsersController {
   async getAll() {
     return this.userService.getAll();
   }
+  @Get('/email/:email')
+  findOneByEmail(@Param('email') email: string) {
+    return this.userService.findByEmail(email);
+  }
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.userService.findOneById(id);
@@ -44,5 +49,9 @@ export class UsersController {
   @Roles('admin')
   create(@Body() reques: CreateUserDto) {
     return this.userService.createUser(reques);
+  }
+  @Get('/auth/verify')
+  async verifyEmail(@Query('token') token: string) {
+    return this.authenservice.verifyEmail(token);
   }
 }

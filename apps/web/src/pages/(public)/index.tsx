@@ -1,71 +1,52 @@
-import CategoryList from './_components/CategoryLish'
-import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import FilterModal from './_components/FilterModal'
-import RoomList from './_components/RoomList'
-import { useEffect, useRef, useState } from 'react';
+import CategoryList from "./_components/CategoryLish";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import FilterModal from "./_components/FilterModal";
+import RoomList from "./_components/RoomList";
+import { useContext, useRef } from "react";
 // import { Roomsdata } from '@/data/roomdata'
-import { fetchCategories, fetchRoomsWithCategory } from '@/apis/categories'
-import { useQuery } from '@tanstack/react-query'
-import { Room } from '@/apis/rooms'
-
+import { fetchCategories, fetchRoomsWithCategory } from "@/apis/categories";
+import { useQuery } from "@tanstack/react-query";
+import { VerifyEmailContext } from "@/utils/VerifyEmailContext";
+import { toast } from "sonner";
 export default function Component() {
-  // const [searchParams] = useSearchParams()
-  const categoryListRef = useRef<HTMLDivElement>(null)
-  const [roomdata, setRoomdata] = useState<Room[]>([])
+  const categoryListRef = useRef<HTMLDivElement>(null);
+  const context = useContext(VerifyEmailContext);
+  if (!context) {
+    throw new Error("useContext must be used within a VerifyEmailProvider");
+  }
+  const { isLogin } = context;
 
-  useEffect(() => {
-    try {
-      const fetchdata = async () => {
-        const rooms = await fetchRoomsWithCategory()
-        setRoomdata(rooms)
-      }
-      fetchdata()
-    } catch (error) {
-      console.log('get rooms category', error)
-    }
-  }, [])
-  console.log('roomdata: ', roomdata)
-  function onRightClick() {
-    if (!categoryListRef.current) return
-    const rect = categoryListRef.current.getBoundingClientRect()
-    categoryListRef.current.scroll({
-      behavior: 'smooth',
-      left: rect.width
-    })
+  if(isLogin){
+    toast.success("Created account successfully!", {duration: 2000})
   }
 
-  function onLeftClick() {
-    if (!categoryListRef.current) return
-    const rect = categoryListRef.current.getBoundingClientRect()
+  function onRightClick() {
+    if (!categoryListRef.current) return;
+    const rect = categoryListRef.current.getBoundingClientRect();
     categoryListRef.current.scroll({
-      behavior: 'smooth',
-      left: rect.width * -1
-    })
+      behavior: "smooth",
+      left: rect.width,
+    });
+  }
+  function onLeftClick() {
+    if (!categoryListRef.current) return;
+    const rect = categoryListRef.current.getBoundingClientRect();
+    categoryListRef.current.scroll({
+      behavior: "smooth",
+      left: rect.width * -1,
+    });
   }
   const categoriesQuery = useQuery({
-    queryKey: ['categories'],
+    queryKey: ["categories"],
     queryFn: fetchCategories,
     initialData: [],
-  })
+  });
   const roomsQuery = useQuery({
-    queryKey: ['rooms'],
+    queryKey: ["rooms"],
     queryFn: () => fetchRoomsWithCategory(),
     initialData: [],
-  })
-  console.log('useQuery: ',{data: categoriesQuery.data, isFetching: categoriesQuery.isFetching})
-  // const categoriesQuery = useQuery({
-  //   queryKey: ['categories'],
-  //   queryFn: fetchCategories,
-  //   initialData: [],
-  // })
-  // const categoryTag = searchParams.get('category_tag') ?? categoriesQuery.data[0]?.id
-
-  // const roomsQuery = useQuery({
-  //   queryKey: ['rooms', categoryTag],
-  //   queryFn: ({ queryKey }) => fetchRooms(queryKey[1]),
-  //   initialData: []
-  // })
+  });
 
   return (
     <>
@@ -76,9 +57,14 @@ export default function Component() {
         >
           <ChevronLeft />
         </div>
-        <div ref={categoryListRef} className="no-scrollbar flex w-4/5 gap-8 overflow-x-auto">
-          {/* <CategoryList categories={categoriesQuery.data} isLoading={categoriesQuery.isFetching} /> */}
-          <CategoryList categories={categoriesQuery.data} isLoading={categoriesQuery.isFetching}/>
+        <div
+          ref={categoryListRef}
+          className="no-scrollbar flex w-4/5 gap-8 overflow-x-auto"
+        >
+          <CategoryList
+            categories={categoriesQuery.data}
+            isLoading={categoriesQuery.isFetching}
+          />
         </div>
         <div
           onClick={onRightClick}
@@ -90,16 +76,15 @@ export default function Component() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
-        {/* <RoomList rooms={roomsQuery.data} isLoading={roomsQuery.isFetching}/> */}
         <RoomList rooms={roomsQuery.data} isLoading={roomsQuery.isFetching} />
       </div>
       <div className="mt-14 flex flex-col items-center">
         <h2 className="text-xl font-bold"> Continue exploring campers </h2>
-        <Button  size="lg" className="mt-4 bg-black hover:bg-black/90">
-          {' '}
+        <Button size="lg" className="mt-4 bg-black hover:bg-black/90">
+          {" "}
           Show More
         </Button>
       </div>
     </>
-  )
+  );
 }

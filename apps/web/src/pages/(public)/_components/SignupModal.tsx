@@ -1,14 +1,21 @@
-import { useState } from "react";
+import {  useContext, useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../../../components/ui/dialog";
 import SignupForm, {type signUpInputs} from "./SignupForm";
 import { signUp } from "@/apis/auths";
 import UpdateProfile, { UpdateProfileInputs } from "./UpdateProfile";
 import { toast } from 'sonner'
+import { VerifyEmailContext } from "@/utils/VerifyEmailContext";
+
 export default function SignupModal() {
   const [register, setRegister] = useState({
     email: "",
     password: ""
   })
+  const context = useContext(VerifyEmailContext);
+  if(!context) {
+    throw new Error("useContext must be used within a VerifyEmailProvider");
+  }
+  const { handleSetEmail } = context;
   const onSignupSubmit = (data: signUpInputs) => {
     setRegister(register => ({...register, 
       email: data.email,
@@ -17,12 +24,12 @@ export default function SignupModal() {
   }
   const onUpdateProfile = async (data: UpdateProfileInputs) => {
     try{
-      const res = await signUp({
-        ...data,
+      handleSetEmail(register.email)
+      await signUp({
         ...register
-      })
-      console.log(res.data)
-      toast.success("Signup successfully!")
+      })   
+      console.log("AccountVerified: ", register.email)
+      console.log("res dataa: ",data)
     }catch (error){
       if(error instanceof Error){
         toast.error(error.message)

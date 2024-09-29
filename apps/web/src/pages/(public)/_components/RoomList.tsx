@@ -23,14 +23,14 @@ export default function RoomList({ rooms, isLoading }: Props) {
     ))
   }
 
-  return rooms.map(room => (
+  return rooms.map((room, index) => (
     <div
-      key={room.id}
+      key={index}
       onClick={() => {
         navigate(`/rooms/:id`, { params: { id: room.id } } )
       }}
     >
-      <RoomCard room={room} key={room.id}/>
+      <RoomCard room={room} key={index}/>
     </div>
   ))
 }

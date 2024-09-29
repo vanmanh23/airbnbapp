@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom'
 import debounce from 'lodash.debounce';
+// import { VerifyEmailProvider } from '@/utils/VerifyEmailContext';
 
 export default function Component() {
   const [isOneTwelfthScrolled, setIsOneTwelfthScrolled] = useState(false);
@@ -24,9 +25,9 @@ export default function Component() {
       handleScroll.cancel(); // Hủy bỏ debounce nếu component bị hủy
     };
   }, []);
-  console.log("isOneTwelfthScrolled: ", isOneTwelfthScrolled)
+  
   return (
-    <div>
+    <>
       <Header hasSearch={isOneTwelfthScrolled} className="sticky top-0 left-0 px-6 sm:px-10 2xl:px-20 bg-white z-30"/>
       <hr />
       <div className="px-6 py-5 sm:px-10 2xl:px-20 overflow-hidden">
@@ -35,6 +36,6 @@ export default function Component() {
       <div className='w-full bg-gray-100 py-10 '>
       <Footer />
       </div>
-    </div>
+    </>
   )
 }

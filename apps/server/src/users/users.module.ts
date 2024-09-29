@@ -6,13 +6,15 @@ import { User } from './users.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from '../auth/auth.service';
 import { UserMiddleWare } from '../middleware/user.middleware';
+import 'dotenv/config';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       global: true,
-      signOptions: { expiresIn: '60s' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '24h' },
     }),
   ],
   providers: [UsersService, AuthService],

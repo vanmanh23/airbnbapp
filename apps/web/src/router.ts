@@ -12,6 +12,7 @@ export type Path =
   | `/host/homes`
   | `/release`
   | `/rooms/:id`
+  | `/waitingVerify`
 
 export type Params = {
   '/rooms/:id': { id: string }
