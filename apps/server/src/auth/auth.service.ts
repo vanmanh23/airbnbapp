@@ -58,6 +58,10 @@ export class AuthService {
     if (!user) {
       throw new Error('User not found');
     }
+    //check if email is verified
+    if (!user.isEmailVerified) {
+      throw new Error('Email not verified');
+    }
     //check if password is correct
     const isPasswordMatch = await bcrypt.compare(
       requestBody.password,

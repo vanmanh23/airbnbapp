@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "@/utils/schema";
 import { z } from "zod";
+import { login } from "@/apis/auths";
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
 interface loginModalProps {
@@ -22,9 +23,13 @@ export default function LoginModal({ title }: loginModalProps) {
   });
 
   const onSubmit = async (data: TSignUpSchema) => {
-    console.log({
-      ...data,
-    });
+    try {
+      const res = await login(data);
+      localStorage.setItem("token", res.access_tocken);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Dialog>
@@ -34,19 +39,18 @@ export default function LoginModal({ title }: loginModalProps) {
         </div>
       </DialogTrigger>
       <DialogContent className="p-0 sm:max-w-[600px] h-5/6 overflow-y-scroll">
-        <div className="sticky left-0 w-full h-14 z-30 -top-1 bg-white border-b-2 border-solid">
-          <h2 className="h-full items-center font-bold text-center mt-2 text-lg">
+        <div className="sticky flex items-center  text-center justify-center left-0 w-full h-14 z-30 -top-1 bg-white border-b-2 border-solid">
+          <h2 className="items-center font-semibold text-center text-center text-xl">
             Log in or sign up
           </h2>
         </div>
         <div className="space-y-4 p-6">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <h1 className="text-2xl font-medium mb-6"> Welcome to Airbnb </h1>
             <Input
               {...register("email")}
               type="email"
               placeholder="email"
-              className="mb-7"
             />
             {errors.email && (
               <p className="text-sm text-red-500">
