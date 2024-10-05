@@ -16,7 +16,7 @@ export default function LanguageModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Globe />
+        <Globe size={16}/>
       </DialogTrigger>
       <DialogContent className="px-6 pt-16 sm:max-w-[888px]">
         <Tabs defaultValue="language">

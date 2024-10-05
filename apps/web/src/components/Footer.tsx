@@ -70,8 +70,8 @@ export default function Footer() {
 
         <div className='md:absolute md:right-0 mb-4 md:mb-0'>
             <ul className='flex gap-5 items-center'>
-                <li className='flex hover:underline hover:cursor-pointer items-center'><Globe />English (US)</li>
-                <li className='flex hover:underline hover:cursor-pointer items-center'><DollarSign />USD</li>
+                <li className='flex hover:underline hover:cursor-pointer items-center text-base font-medium'><Globe size={16} className='mr-2'/>English (US)</li>
+                <li className='flex hover:underline hover:cursor-pointer items-center text-base font-medium'><DollarSign size={16} className='mr-2'/>USD</li>
                 <li><div className='md:flex gap-3 items-center flex-row hidden'>
                     <Facebook />
                     <Twitter />

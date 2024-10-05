@@ -32,9 +32,9 @@ export default function Header({ className, hasSearch}: HeaderProps) {
       </Link>
       { hasSearch ? (
         <div className="flex rounded-full border  px-2 py-2 shadow-xl">
-          <button className="border-r px-4"> Anywhere </button>
-          <button className="border-r px-4"> Any week </button>
-          <button className="px-4"> Add guests </button>
+          <button className="border-r px-4 text-base"> Anywhere </button>
+          <button className="border-r px-4 text-base"> Any week </button>
+          <button className="px-4 text-base"> Add guests </button>
           <button className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-white">
             <Search className="w-5" />
           </button>
@@ -43,14 +43,14 @@ export default function Header({ className, hasSearch}: HeaderProps) {
       :
       <div className="md:inline-block hidden">
         <div className="flex flex-row gap-6 mb-7">
-            <button className={`text-lg cusor-pointer font-normal ${searchSelected === "stays" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("stays")}>{t('where')}</button>
-            <button className={`text-lg cursor-pointer font-normal ${searchSelected === "experiences" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("experiences")}>{t('Experiences')}</button>
+            <button className={`text-base cusor-pointer font-normal ${searchSelected === "stays" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("stays")}>{t('where')}</button>
+            <button className={`text-base cursor-pointer font-normal ${searchSelected === "experiences" ? "text-black" : "opacity-60"}`} onClick={() => setSearchSelected("experiences")}>{t('Experiences')}</button>
         </div>
       </div>
       }
 
       <div className="flex items-center gap-3 h-10">
-        <Link to="/host/homes" className="px-3 text-base font-semibold flex items-center rounded-full hover:bg-gray-100 md:inline-block hidden">
+        <Link to="/host/homes" className="px-3 text-sm font-semibold flex items-center rounded-full hover:bg-gray-100 md:inline-block hidden">
           Airbnb your home
         </Link>
         <div className="flex items-center rounded-full p-3 hover:bg-gray-100">

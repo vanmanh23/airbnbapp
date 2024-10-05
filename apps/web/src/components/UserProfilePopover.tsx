@@ -13,8 +13,8 @@ export default function UserProfilePopover() {
       <PopoverTrigger asChild>
         <button className="flex items-center justify-center gap-3 h-12 rounded-full px-3 border-solid border-2 shadow-xl">
           <AlignJustify className="w-4" />
-          <div className="flex h-8 w-8 items-end justify-center rounded-full bg-secondary-color text-white">
-            <User2 color="white" className="text-black" />
+          <div className="flex h-7 w-7 items-end justify-center rounded-full bg-secondary-color text-white">
+            <User2 color="white" size={25} className="text-black" />
           </div>
         </button>
       </PopoverTrigger>

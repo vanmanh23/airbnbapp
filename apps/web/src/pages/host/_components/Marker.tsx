@@ -1,4 +1,4 @@
-import Carousel from '@/components/ui/carousel'
+// import Carousel from '@/components/ui/carousel'
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { cn } from '@/utils/cn'
 import { Room } from '@/utils/type'
@@ -28,7 +28,7 @@ export default function Marker({ room }: MarkerProps) {
         <PopoverClose className="absolute left-4 top-4 z-50 rounded-full bg-slate-400 p-1 text-white">
           <X size={16} />
         </PopoverClose>
-        <Carousel images={room.images} className="h-60 rounded-tl-xl rounded-tr-xl" />
+        {/* <Carousel imagess={room.images} className="h-60 rounded-tl-xl rounded-tr-xl" /> */}
         <p className="p-2 font-bold">{room.name}</p>
       </PopoverContent>
     </Popover>

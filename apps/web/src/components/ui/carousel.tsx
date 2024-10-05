@@ -5,8 +5,10 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface CarouselProps {
   images: [
-    id: number,
-    imageUrl: string
+    {
+      id: number,
+      imageUrl: string
+    }
   ]
   loop?: boolean
   autoplay?: boolean
