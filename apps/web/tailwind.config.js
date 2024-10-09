@@ -33,6 +33,7 @@ module.exports = {
         "color-host": "#e51e4f",
         "secondary-color": "#6a6a6a",
         "button-color": "#222222",
+        "base-color": "#222222",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

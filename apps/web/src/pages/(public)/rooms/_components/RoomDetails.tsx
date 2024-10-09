@@ -6,13 +6,13 @@ export default function RoomDetails() {
   return (
     <div className="flex flex-col gap-7">
       <div>
-        <h2 className="font-medium text-2xl">
+        <h2 className="font-medium text-2xl text-base-color">
           Entire villa in Abiansemal, Indonesia
         </h2>
-        <p className="text-lg">4 guests2 bedrooms2 beds2 baths</p>
-        <div className="flex flex-row gap-2 mt-2">
+        <p className="text-lg text-base-color">4 guests2 bedrooms2 beds2 baths</p>
+        <div className="flex flex-row gap-2 mt-2 text-base-color">
           <Star />
-          <p className="font-bold text-lg">4.68 · 288 reviews</p>
+          <p className="font-bold text-lg text-base-color">4.68 · 288 reviews</p>
         </div>
       </div>
       <hr />

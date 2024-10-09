@@ -33,7 +33,7 @@ export default function HeaderRoom({ className }: HeaderProps) {
   return (
     <header className={`bg-white z-30 flex flex-col py-5 ${className}`}>
       {!headerMini ? (
-        <div className={`flex justify-between `}>
+        <div className={`flex justify-between items-center`}>
           <Link to="/">
             <svg
               width="102"

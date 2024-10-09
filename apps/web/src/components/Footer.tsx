@@ -64,18 +64,18 @@ export default function Footer() {
             </div>
         ))}
       </div>
-      <div className='relative mt-8 mb-24 text-sm'>
+      <div className='relative mt-8 text-sm'>
         <hr className='w-full md:inline-block hidden'/>
         <div className='flex justify-between mt-5 md:flex-row flex-col'>
 
         <div className='md:absolute md:right-0 mb-4 md:mb-0'>
             <ul className='flex gap-5 items-center'>
-                <li className='flex hover:underline hover:cursor-pointer items-center text-base font-medium'><Globe size={16} className='mr-2'/>English (US)</li>
-                <li className='flex hover:underline hover:cursor-pointer items-center text-base font-medium'><DollarSign size={16} className='mr-2'/>USD</li>
+                <li className='flex hover:underline hover:cursor-pointer items-center text-base font-medium text-base-color'><Globe size={16} className='mr-2'/>English (US)</li>
+                <li className='flex hover:underline hover:cursor-pointer items-center text-base font-medium text-base-color'><DollarSign size={16} className='mr-2'/>USD</li>
                 <li><div className='md:flex gap-3 items-center flex-row hidden'>
-                    <Facebook />
-                    <Twitter />
-                    <Instagram />
+                    <Facebook size={16} />
+                    <Twitter size={16}/>
+                    <Instagram size={16}/>
                     </div></li>
             </ul>
         </div>
@@ -83,14 +83,17 @@ export default function Footer() {
         <div className='flex float-left'>
             <ul className='flex md:flex-row flex-col gap-3'>
                 <li className='hover:underline hover:cursor-pointer'>© 2023 Airbnb, Inc.</li>
-                <li>
+                
+                <div className='flex md:flex-row flex-row gap-3'>
+                    <li>
                     <ul className='flex flex-row gap2'>
                         <li className='hover:underline hover:cursor-pointer'>·Terms</li>
                         <li className='hover:underline hover:cursor-pointer'>·Sitemap</li>
                         <li className='hover:underline hover:cursor-pointer'>·Privacy</li>
                     </ul>
                 </li>
-                <li className='hover:underline hover:cursor-pointer'>·Your Privacy Choices</li>
+                <li className='flex flex-row justify-center items-center gap-3 hover:underline hover:cursor-pointer'><p>·Your Privacy Choices</p> <svg width="26" height="12" fill="none"><rect x="0.5" y="0.5" width="25" height="11" rx="5.5" fill="#fff"></rect><path d="M14 1h7a5 5 0 010 10H11l3-10z" fill="#06F"></path><path d="M4.5 6.5l1.774 1.774a.25.25 0 00.39-.049L9.5 3.5" stroke="#06F" stroke-linecap="round"></path><path d="M16.5 3.5L19 6m0 0l2.5 2.5M19 6l2.5-2.5M19 6l-2.5 2.5" stroke="#fff" stroke-linecap="round"></path><rect x="0.5" y="0.5" width="25" height="11" rx="5.5" stroke="#06F"></rect></svg></li>
+                </div>
             </ul>
         </div>
         </div>
