@@ -6,6 +6,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
   isEmailVerified: boolean = false;
+  role: string = 'user';
 }
 
 export class LoginUserDto {

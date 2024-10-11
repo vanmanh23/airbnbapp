@@ -8,8 +8,8 @@ export const features = [
       icon: Gauge,
     },
     {
-      name: "Products",
-      href: "products",
+      name: "Rooms",
+      href: "rooms",
       icon: Grid2X2,
     },
     {

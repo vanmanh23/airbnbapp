@@ -54,4 +54,8 @@ export class UsersController {
   async verifyEmail(@Query('token') token: string) {
     return this.authenservice.verifyEmail(token);
   }
+  @Get('/auth/verify/:token')
+  async verifyToken(@Param('token') token: string) {
+    return this.authenservice.verifyToken(token);
+  }
 }

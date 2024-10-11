@@ -35,12 +35,12 @@ export default function Sidebar(toggle: SidebarOptions) {
           <span className="text-primary">Dash</span>Stack
         </h2>
       </div>
-      <div className="p-6">
+      <div className="p-6 text-base-color">
         {features.slice(0, 6).map((feature) => (
           <Link 
           key={feature.name}
             to={`/admin/${feature.href}`}
-            className={`flex flex-row mb-2 gap-4 h-10 text-primary items-center rounded-md duration-75 ${
+            className={`flex flex-row mb-2 gap-4 h-10 text-base-color items-center rounded-md duration-75 ${
               activeItem === feature.name ? "bg-primary text-white" : ""
             }`}
             onClick={() => handleItemClick(feature.name)}
@@ -56,7 +56,7 @@ export default function Sidebar(toggle: SidebarOptions) {
           <Link
           key={feature.name}
             to={`/${feature.href}`}
-            className={`flex flex-row mb-2 gap-4 h-10 text-primary items-center rounded-md duration-75 ${
+            className={`flex flex-row mb-2 gap-4 h-10 text-base-color items-center rounded-md duration-75 ${
               activeItem === feature.name ? "bg-primary text-white" : ""
             }`}
             onClick={() => handleItemClick(feature.name)}
@@ -72,7 +72,7 @@ export default function Sidebar(toggle: SidebarOptions) {
           <Link
           key={feature.name}
             to={`/${feature.href}`}
-            className={`flex flex-row mb-2 gap-4 h-10 text-primary items-center rounded-md duration-75 ${
+            className={`flex flex-row mb-2 gap-4 h-10 text-base-color items-center rounded-md duration-75 ${
               activeItem === feature.name ? "bg-primary text-white" : ""
             }`}
             onClick={() => handleItemClick(feature.name)}

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "@/utils/schema";
 import { z } from "zod";
-import { login } from "@/apis/auths";
+import { login, verifyToken } from "@/apis/auths";
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
 interface loginModalProps {
@@ -26,7 +26,13 @@ export default function LoginModal({ title }: loginModalProps) {
     try {
       const res = await login(data);
       localStorage.setItem("token", res.access_tocken);
-      window.location.reload();
+      const role = await verifyToken(res.access_tocken);
+      if (role.role === "admin") {
+        window.location.href = "/admin";
+      } else {
+        window.location.reload();
+      }
+      
     } catch (error) {
       console.log(error);
     }

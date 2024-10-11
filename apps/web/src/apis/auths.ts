@@ -25,3 +25,7 @@ export const isAccountVerified = async (email: string) => {
   const isEmailVerified = await res.data.data.isEmailVerified;
   return isEmailVerified;
 }
+export const verifyToken = async (token: string) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/auth/verify/${token}`);
+  return res.data.data;
+}

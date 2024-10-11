@@ -148,4 +148,10 @@ export class AuthService {
     await this.userService.verifyEmail(decoded.email);
     return { message: 'Email verified successfully' };
   }
+  async verifyToken(token: string) {
+    const decoded = this.jwtService.verify(token);
+    const user = await this.userService.findByEmail(decoded.email);
+    if (!user) throw new Error('User not found');
+    return user;
+  }
 }

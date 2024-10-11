@@ -12,4 +12,7 @@ export class User {
 
   @Column({ default: false })
   isEmailVerified: boolean;
+
+  @Column({ default: 'user' })
+  role: string;
 }
