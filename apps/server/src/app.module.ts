@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, UseFilters } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ItemModule } from './item/item.module'; // Module CRUD của bạn
 import { CategoryModule } from './category/category.module';
@@ -9,10 +9,9 @@ import { AuthService } from './auth/auth.service';
 import { User } from './users/users.entity';
 import { Rooms } from './rooms/rooms.entity';
 import { ConfigModule } from '@nestjs/config';
-import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { UserMiddleWare } from './middleware/user.middleware';
 
-@UseFilters(HttpExceptionFilter)
+// @UseFilters(HttpExceptionFilter)
 @Module({
   imports: [
     TypeOrmModule.forRoot({
