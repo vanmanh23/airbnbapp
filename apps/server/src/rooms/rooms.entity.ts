@@ -5,11 +5,10 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
-  // PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { IsNotEmpty } from 'class-validator';
+// import { IsNotEmpty } from 'class-validator';
 
 @Injectable()
 @Entity()
