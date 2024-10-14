@@ -4,50 +4,37 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
-import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+// import { useEffect, useState } from "react";
+// import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
+import RoomForm, { IFormValues } from "./RoomForm";
+import {  createImagesOfRoom, createRoom } from "@/apis/rooms";
 
-
-interface IFormValues {
-  "name": string;
-  "price": string;
-  "date": string;
-  "distance": string;
-  "imageUrls": File[]
-}
-type InputProps = {
-  label: Path<IFormValues>;
-  register: UseFormRegister<IFormValues>;
-  required: boolean;
-  type: string;
-  multiple?: boolean;
-};
-const Input = ({ label, register, required, type, multiple }: InputProps) => (
-  <>
-    <label>{label}</label>
-    <input type={type} {...register(label, { required })} multiple={multiple} className="border border-gray-300 rounded-md p-2"/>
-  </>
-);
 export default function RoomList() {
-  const [dd, setDD] = useState<string[]>([]);
-  const { register, handleSubmit, watch } = useForm<IFormValues>();
-  const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    // Convert FileList to an array of files for multiple images
-    const formData = {
-      ...data,
-      imageUrls: Array.from(data.imageUrls)
-    };
-    console.log(formData);
-    alert(JSON.stringify(formData));
-  };
-  // Watch for image changes
-  useEffect(() => {
-    const images = watch("imageUrls");
-    if (images) {
-      const imageURLs = Array.from(images).map((file) => URL.createObjectURL(file));
-      setDD(imageURLs); // Update state with image preview URLs
+    const onSubmitForm = async (data: IFormValues) => {
+      const imageURLs = Array.from(data.imageUrls).map((file) => URL.createObjectURL(file));
+      // console.log("data sdss", imageURLs);
+      try {
+        // const roomId = (Math.random() + 1).toString(36).substring(7);
+        // const imageURLs = Array.from(data.imageUrls).map((file) => URL.createObjectURL(file));
+        // const imageURLs = data.imageUrls.map((file) => URL.createObjectURL(file));
+        // const images = data.imageUrls;
+        // if (images) {
+        //   imageURLs = Array.from(images).map((file) => URL.createObjectURL(file));
+        // }
+      const res = await createRoom({ 
+        categoryId: data.category,
+        name: data.name,
+        price: Number(data.price),
+        date: data.date,
+        distance: data.distance,
+       });
+       if(res) {
+        await createImagesOfRoom({ imageUrl: imageURLs, roomId: res.data.id });
+       }
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }, [watch("imageUrls")]);
   return (
     <div>
       <div className="flex flex-row justify-between items-center">
@@ -59,27 +46,19 @@ export default function RoomList() {
             </DialogTrigger>
             <DialogContent>
               <div className="p-6">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
-                  <Input type="text" label="name" register={register} required />
-                  <Input type="number" label="price" register={register} required />
-                  <Input type="date" label="date" register={register} required />
-                  <Input type="number" label="distance" register={register} required />
-                  <Input type="file" label="imageUrls" register={register} required multiple />
-
-                  <input type="submit" />
-                </form>
+                <RoomForm onSubmit={onSubmitForm}/>
               </div>
             </DialogContent>
           </Dialog>
         </div>
       </div>
       <div>
-      {dd?.map((image, index) => (
+      {/* {imageURLs?.map((image, index) => (
           <div key={index}>
             <p>{image}</p>
             <img src={image} alt={`Preview ${index}`} className="w-32 h-32 object-cover" />
           </div>
-        ))}
+        ))} */}
         {/* {
           register("imageUrls").map((image, index) => (
             <div key={index}>

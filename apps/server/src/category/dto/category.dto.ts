@@ -1,5 +1,5 @@
 export class CategoryDto {
-  id: number;
+  id: string;
   icon: string;
   title: string;
 }

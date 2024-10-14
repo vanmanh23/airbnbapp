@@ -4,6 +4,10 @@ import Carousel from '@/components/ui/carousel'
 interface RoomProps {
   room: Room
 }
+// interface ImagesEntity {
+//   imageUrl: string[]
+//   roomId: string;
+// }
 
 export default function RoomCard({ room }: RoomProps) {
   return (

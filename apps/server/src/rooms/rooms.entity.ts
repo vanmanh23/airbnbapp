@@ -5,15 +5,17 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
+  // PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { IsNotEmpty } from 'class-validator';
 
 @Injectable()
 @Entity()
 export class Rooms {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
   @Column({ length: 50 })
   name: string;
 

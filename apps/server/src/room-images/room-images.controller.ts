@@ -13,8 +13,15 @@ export class RoomImagesController {
   @Post('/newimage/:id')
   async create(
     @Body('imageUrls') imageUrls: string[],
-    @Param('id') id: number,
+    @Param('id') id: string,
   ): Promise<void> {
     await this.roomImagesService.create(imageUrls, id);
   }
+  // @Post('/newimage/:id')
+  // async create(
+  //   @Body('imageUrls') imageUrls: string[],
+  //   @Param('id') id: number,
+  // ): Promise<void> {
+  //   await this.roomImagesService.create(imageUrls, id);
+  // }
 }

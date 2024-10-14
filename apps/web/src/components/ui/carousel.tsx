@@ -20,7 +20,7 @@ interface CarouselProps {
 }
 
 export default function Carousel({
-  images,
+  images ,
   autoplay = false,
   autoplayDelay = 400,
   loop = true,

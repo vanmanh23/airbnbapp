@@ -31,26 +31,46 @@ export class CategoryController {
   }
 
   @Get(':id')
-  async removeById(@Param('id') id: number): Promise<void> {
+  async removeById(@Param('id') id: string): Promise<void> {
     try {
       await this.categoryService.remove(id);
     } catch (e) {
       console.log(e);
     }
   }
+  // @Get(':id')
+  // async removeById(@Param('id') id: number): Promise<void> {
+  //   try {
+  //     await this.categoryService.remove(id);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   @Get('rooms/:id')
-  getRoomsCategory(@Param('id') id: number) {
+  getRoomsCategory(@Param('id') id: string) {
     return this.categoryService.getAllRoomsOfCategory(id);
   }
   @Put(':id')
   async updateItem(
     @Body() categoryupdate: CategoryDto,
-    @Param('id') id: number,
+    @Param('id') id: string,
   ): Promise<Category> {
     const oldcategory = await this.categoryService.getById(id);
     return await this.categoryService.update(oldcategory, categoryupdate);
   }
+  // @Get('rooms/:id')
+  // getRoomsCategory(@Param('id') id: number) {
+  //   return this.categoryService.getAllRoomsOfCategory(id);
+  // }
+  // @Put(':id')
+  // async updateItem(
+  //   @Body() categoryupdate: CategoryDto,
+  //   @Param('id') id: number,
+  // ): Promise<Category> {
+  //   const oldcategory = await this.categoryService.getById(id);
+  //   return await this.categoryService.update(oldcategory, categoryupdate);
+  // }
   @Get('/allrooms')
   async getRooms(): Promise<Rooms[]> {
     return await this.roomService.getAllRoomsWithDetail();

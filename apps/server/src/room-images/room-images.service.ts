@@ -16,7 +16,7 @@ export class RoomImagesService {
   async findAll(): Promise<RoomImage[]> {
     return this.roomImagesRepository.find();
   }
-  async create(imageUrls: string[], roomId: number): Promise<void> {
+  async create(imageUrls: string[], roomId: string): Promise<void> {
     const room = await this.roomRepository.findOne({ where: { id: roomId } });
     if (!room) {
       throw new Error('Room not found');
@@ -28,4 +28,16 @@ export class RoomImagesService {
     await this.roomImagesRepository.save(roomImages);
     // return this.roomImagesRepository.save({ ...RoomImage, roomId });
   }
+  // async create(imageUrls: string[], roomId: number): Promise<void> {
+  //   const room = await this.roomRepository.findOne({ where: { id: roomId } });
+  //   if (!room) {
+  //     throw new Error('Room not found');
+  //   }
+  //   const roomImages = imageUrls.map((url) => {
+  //     return { imageUrl: url, room: room };
+  //   });
+  //   // console.log('roomImages: ', roomImages);
+  //   await this.roomImagesRepository.save(roomImages);
+  //   // return this.roomImagesRepository.save({ ...RoomImage, roomId });
+  // }
 }

@@ -1,8 +1,8 @@
 export class RoomDto {
-  id?: number;
+  id?: string;
   name: string;
   price: number;
   date: Date;
   distance: string;
-  categoryId: number;
+  categoryId: string;
 }

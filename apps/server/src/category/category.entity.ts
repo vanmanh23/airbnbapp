@@ -5,8 +5,9 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 @Injectable()
 @Entity()
 export class Category {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+  // id: number;
   @Column()
   icon: string;
   @Column()

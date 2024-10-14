@@ -18,13 +18,20 @@ export class CategoryService {
     return await this.categoryRepository.findOneBy({ title });
   }
 
-  async getById(id: number): Promise<Category> {
+  async getById(id: string): Promise<Category> {
     try {
       return await this.categoryRepository.findOneBy({ id });
     } catch (error) {
       throw new Error(error);
     }
   }
+  // async getById(id: number): Promise<Category> {
+  //   try {
+  //     return await this.categoryRepository.findOneBy({ id });
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
 
   async create(category: Category): Promise<Category> {
     return await this.categoryRepository.save(category);
@@ -45,13 +52,22 @@ export class CategoryService {
     }
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.categoryRepository.delete(id);
   }
-  getAllRoomsOfCategory(id: number) {
+  // async remove(id: number): Promise<void> {
+  //   await this.categoryRepository.delete(id);
+  // }
+  getAllRoomsOfCategory(id: string) {
     return this.categoryRepository.find({
       where: { id },
       relations: ['rooms'],
     });
   }
+  // getAllRoomsOfCategory(id: number) {
+  //   return this.categoryRepository.find({
+  //     where: { id },
+  //     relations: ['rooms'],
+  //   });
+  // }
 }

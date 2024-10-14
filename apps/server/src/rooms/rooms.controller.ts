@@ -15,13 +15,17 @@ export class RoomsController {
   getRoomById(@Param() params): Promise<any> {
     return this.roomsService.getRoomandImages(params.id);
   }
-  @Post('/category/:id/newroom')
-  async create(
-    @Body() room: RoomDto,
-    @Param('id') id: number,
-  ): Promise<RoomDto> {
-    return await this.roomsService.create(room, id);
+  @Post('/category/newroom')
+  async create(@Body() room: RoomDto): Promise<RoomDto> {
+    return await this.roomsService.create(room);
   }
+  // @Post('/category/:id/newroom')
+  // async create(
+  //   @Body() room: RoomDto,
+  //   @Param('id') id: number,
+  // ): Promise<RoomDto> {
+  //   return await this.roomsService.create(room, id);
+  // }
   @Get('/all')
   async getAllRooms(): Promise<Rooms[]> {
     return this.roomsService.getAllRoomsWithDetail();
