@@ -10,7 +10,6 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto, LoginUserDto } from './dto/users.dto';
 import { AuthService } from 'src/auth/auth.service';
-import { ParseIntPipe } from 'src/pipes/parse-int.pipe';
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
 import { Roles } from 'src/auth/roles.decorator';
 
@@ -31,7 +30,7 @@ export class UsersController {
     return this.userService.findByEmail(email);
   }
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: number) {
     return this.userService.findOneById(id);
   }
   @Post('/register')
