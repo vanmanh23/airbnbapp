@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Rooms } from 'src/rooms/rooms.entity';
+import { Rooms } from '../../src/rooms/rooms.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Injectable()

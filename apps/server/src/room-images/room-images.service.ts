@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RoomImage } from './room-images.entity';
 import { Repository } from 'typeorm';
-import { Rooms } from 'src/rooms/rooms.entity';
+import { Rooms } from '../../src/rooms/rooms.entity';
 
 @Injectable()
 export class RoomImagesService {

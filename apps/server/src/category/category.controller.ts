@@ -2,8 +2,8 @@ import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 import { CategoryDto } from './dto/category.dto';
-import { RoomsService } from 'src/rooms/rooms.service';
-import { Rooms } from 'src/rooms/rooms.entity';
+import { RoomsService } from '../../src/rooms/rooms.service';
+import { Rooms } from '../../src/rooms/rooms.entity';
 
 @Controller('categories')
 export class CategoryController {
