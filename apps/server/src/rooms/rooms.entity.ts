@@ -1,4 +1,4 @@
-import { Category } from 'src/category/category.entity';
+import { Category } from '../../src/category/category.entity';
 import { RoomImage } from '../room-images/room-images.entity';
 import {
   Column,
