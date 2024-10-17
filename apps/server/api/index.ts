@@ -1,1 +1,1 @@
-import '../dist/main';
+import '../src/main';
