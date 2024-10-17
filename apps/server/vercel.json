@@ -4,5 +4,10 @@
       "runtime": "@vercel/node"
     }
   },
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api" }
+  ],
+  "engines": {
+    "node": "18.x"
+  }
 }
