@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ItemModule } from './item/item.module'; // Module CRUD của bạn
@@ -8,25 +9,36 @@ import { UsersModule } from './users/users.module';
 import { AuthService } from './auth/auth.service';
 import { User } from './users/users.entity';
 import { Rooms } from './rooms/rooms.entity';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserMiddleWare } from './middleware/user.middleware';
 
 // @UseFilters(HttpExceptionFilter)
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'Manh2003@',
-      database: 'airbnb_db',
-      autoLoadEntities: true,
-      synchronize: true, // Đồng bộ tự động các thay đổi lên database
-      entities: [User, Rooms],
-    }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: process.env.DB_PASSWORD,
+    //   database: process.env.DB_NAME,
+    //   autoLoadEntities: true,
+    //   synchronize: true, // Đồng bộ tự động các thay đổi lên database
+    //   entities: [User, Rooms],
+    // }),
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'mysql',
+        url: configService.get<string>('DATABASE_URL'),
+        autoLoadEntities: true,
+        synchronize: true,
+        entities: [User, Rooms],
+      }),
     }),
     ItemModule,
     CategoryModule,
