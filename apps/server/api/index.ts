@@ -1,1 +1,1 @@
-import '../src/main';
+export { default } from '../dist/main.js';
