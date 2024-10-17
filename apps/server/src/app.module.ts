@@ -11,6 +11,7 @@ import { User } from './users/users.entity';
 import { Rooms } from './rooms/rooms.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserMiddleWare } from './middleware/user.middleware';
+import { Category } from './category/category.entity';
 
 // @UseFilters(HttpExceptionFilter)
 @Module({
@@ -37,7 +38,7 @@ import { UserMiddleWare } from './middleware/user.middleware';
         url: configService.get<string>('DATABASE_URL'),
         autoLoadEntities: true,
         synchronize: true,
-        entities: [User, Rooms],
+        entities: [User, Rooms, Category],
       }),
     }),
     ItemModule,
