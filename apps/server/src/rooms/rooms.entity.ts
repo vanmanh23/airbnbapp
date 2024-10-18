@@ -15,6 +15,7 @@ import { Injectable } from '@nestjs/common';
 export class Rooms {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
   @Column({ length: 50 })
   name: string;
 
@@ -26,6 +27,7 @@ export class Rooms {
 
   @Column({ length: 50, nullable: true })
   distance: string;
+
   @ManyToOne(() => Category, (category) => category.rooms)
   category: Category;
 

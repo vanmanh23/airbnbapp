@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { ItemModule } from './item/item.module'; // Module CRUD của bạn
 import { CategoryModule } from './category/category.module';
 import { RoomImagesModule } from './room-images/room-images.module';
@@ -12,6 +12,7 @@ import { Rooms } from './rooms/rooms.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserMiddleWare } from './middleware/user.middleware';
 import { Category } from './category/category.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 // @UseFilters(HttpExceptionFilter)
 @Module({
