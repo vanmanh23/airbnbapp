@@ -1,11 +1,10 @@
 {
   "name": "server",
   "version": "0.0.1",
-  "description": "An REST API with NESTJS",
-  "author": "manh-nguyen",
+  "description": "",
+  "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "main": "src/main.ts",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -31,6 +30,8 @@
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.4.2",
     "@nestjs/typeorm": "^10.0.2",
+    "@swc/cli": "0.4.1-nightly.20240914",
+    "@swc/core": "^1.7.36",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
