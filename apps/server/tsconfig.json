@@ -19,8 +19,9 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
   },
+  "exclude": ["node_modules", "dist"],
   "watchOptions": {
     "watchFile": "fixedPollingInterval"
   }
