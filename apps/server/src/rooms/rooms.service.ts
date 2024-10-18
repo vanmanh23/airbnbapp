@@ -20,7 +20,7 @@ export class RoomsService {
     try {
       return await this.roomsRepository.findOneBy({ id });
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.toString());
     }
   }
   // async getRoomById(id: number): Promise<Rooms> {
@@ -75,7 +75,7 @@ export class RoomsService {
       //   categoryId: rooms.categoryId,
       // };
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.toString());
     }
   }
   // async create(rooms: RoomDto, categoryId: number): Promise<RoomDto> {

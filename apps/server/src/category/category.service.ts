@@ -22,7 +22,7 @@ export class CategoryService {
     try {
       return await this.categoryRepository.findOneBy({ id });
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.toString());
     }
   }
   // async getById(id: number): Promise<Category> {
@@ -48,7 +48,7 @@ export class CategoryService {
     try {
       return await this.categoryRepository.save(updatecategory);
     } catch (e) {
-      throw new Error(e);
+      throw new Error(e.toString());
     }
   }
 

@@ -13,7 +13,7 @@
     "incremental": true,
     "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
@@ -22,5 +22,8 @@
       "@/*": ["src/*"]
     },
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist"],
+  "watchOptions": {
+    "watchFile": "fixedPollingInterval"
+  }
 }
