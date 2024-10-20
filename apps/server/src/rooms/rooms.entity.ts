@@ -11,7 +11,7 @@ import { Injectable } from '@nestjs/common';
 // import { IsNotEmpty } from 'class-validator';
 
 @Injectable()
-@Entity()
+@Entity('rooms')
 export class Rooms {
   @PrimaryGeneratedColumn('uuid')
   id: string;

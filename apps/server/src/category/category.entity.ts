@@ -3,7 +3,7 @@ import { Rooms } from '../../src/rooms/rooms.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Injectable()
-@Entity()
+@Entity('category')
 export class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;

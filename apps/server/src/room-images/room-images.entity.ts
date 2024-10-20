@@ -9,7 +9,7 @@ import { Rooms } from '../rooms/rooms.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-@Entity()
+@Entity('room_image')
 export class RoomImage {
   @PrimaryGeneratedColumn()
   id: number;
