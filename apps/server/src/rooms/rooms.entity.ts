@@ -1,5 +1,5 @@
 import { Category } from '../../src/category/category.entity';
-import { Injectable } from '@nestjs/common';
+// import { Injectable } from '@nestjs/common';
 import { RoomImage } from '../room-images/room-images.entity';
 import {
   Column,
@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Injectable()
+// @Injectable()
 @Entity()
 export class Rooms {
   @PrimaryGeneratedColumn('uuid')
@@ -30,6 +30,6 @@ export class Rooms {
   @ManyToOne(() => Category, (category) => category.rooms)
   category: Category;
 
-  @OneToMany(() => RoomImage, (roomImage) => roomImage.room)
+  @OneToMany(() => RoomImage, (roomImage) => roomImage.room, { cascade: true })
   images: RoomImage[];
 }

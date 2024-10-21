@@ -5,10 +5,10 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+// import { Injectable } from '@nestjs/common';
 import { Rooms } from '../rooms/rooms.entity';
 
-@Injectable()
+// @Injectable()
 @Entity()
 export class RoomImage {
   @PrimaryGeneratedColumn()
@@ -17,7 +17,7 @@ export class RoomImage {
   @Column({ length: 500 })
   imageUrl: string;
 
-  @ManyToOne(() => Rooms, (room) => room.images)
+  @ManyToOne(() => Rooms, (room) => room.images, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'roomid' })
   room: Rooms;
 }
