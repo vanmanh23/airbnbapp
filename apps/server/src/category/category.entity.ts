@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Rooms } from '../../src/rooms/rooms.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+// import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Injectable()
-@Entity('category')
+@Entity()
 export class Category {
   @PrimaryGeneratedColumn('uuid')
   id: string;

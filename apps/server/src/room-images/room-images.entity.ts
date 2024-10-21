@@ -5,16 +5,18 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Rooms } from '../rooms/rooms.entity';
 import { Injectable } from '@nestjs/common';
+import { Rooms } from '../rooms/rooms.entity';
 
 @Injectable()
-@Entity('room_image')
+@Entity()
 export class RoomImage {
   @PrimaryGeneratedColumn()
   id: number;
+
   @Column({ length: 500 })
   imageUrl: string;
+
   @ManyToOne(() => Rooms, (room) => room.images)
   @JoinColumn({ name: 'roomid' })
   room: Rooms;

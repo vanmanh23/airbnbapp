@@ -1,4 +1,5 @@
 import { Category } from '../../src/category/category.entity';
+import { Injectable } from '@nestjs/common';
 import { RoomImage } from '../room-images/room-images.entity';
 import {
   Column,
@@ -7,11 +8,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Injectable } from '@nestjs/common';
-// import { IsNotEmpty } from 'class-validator';
 
 @Injectable()
-@Entity('rooms')
+@Entity()
 export class Rooms {
   @PrimaryGeneratedColumn('uuid')
   id: string;
