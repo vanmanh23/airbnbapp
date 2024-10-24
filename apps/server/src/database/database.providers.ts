@@ -9,6 +9,7 @@ export const databaseProviders = [
         type: 'mysql',
         url: process.env.DATABASE_URL,
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+        connectTimeout: 60 * 60 * 1000,
         synchronize: true,
       });
 

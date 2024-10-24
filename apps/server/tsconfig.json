@@ -20,8 +20,5 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
   },
-  "exclude": ["node_modules", "dist"],
-  "watchOptions": {
-    "watchFile": "fixedPollingInterval"
-  }
+  "exclude": ["node_modules", "dist"]
 }
