@@ -10,20 +10,30 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserMiddleWare } from './middleware/user.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmConfigService } from './config/database';
+
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        url: configService.get<string>('DATABASE_URL'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+
+      TypeOrmModule.forRootAsync(
+      {
+        inject: [ConfigModule],
+        useClass: TypeOrmConfigService,
+      }),
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //   useFactory: (configService: ConfigService) => ({
+    //     type: 'mysql',
+    //     url: configService.get<string>('DATABASE_URL'),
+    //     entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    //     synchronize: true,
+    //     connectTimeout: 20000, // Increase timeout to 20 seconds
+    //     acquireTimeout: 20000, // Increase timeout to 20 seconds
         // logging: true,
         // connectTimeout: 30000,
         // type: 'mysql',
@@ -41,8 +51,8 @@ import { AuthModule } from './auth/auth.module';
         //   waitForConnections: true, // Wait if all connections are in use
         //   connectTimeout: 10000,
         // },
-      }),
-    }),
+    //   }),
+    // }),
     ItemModule,
     CategoryModule,
     RoomsModule,
