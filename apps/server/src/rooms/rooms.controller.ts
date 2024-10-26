@@ -8,26 +8,19 @@ export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 
   @Get()
-  async getAll(): Promise<Rooms[]> {
+  async getAll(){
     return await this.roomsService.getAll();
   }
   @Get('room/:id')
-  getRoomById(@Param() params): Promise<any> {
+  getRoomById(@Param() params) {
     return this.roomsService.getRoomandImages(params.id);
   }
   @Post('/category/newroom')
-  async create(@Body() room: RoomDto): Promise<RoomDto> {
+  async create(@Body() room: RoomDto) {
     return await this.roomsService.create(room);
   }
-  // @Post('/category/:id/newroom')
-  // async create(
-  //   @Body() room: RoomDto,
-  //   @Param('id') id: number,
-  // ): Promise<RoomDto> {
-  //   return await this.roomsService.create(room, id);
+  // @Get('/all')
+  // async getAllRooms() {
+  //   return this.roomsService.getAllRoomsWithDetail();
   // }
-  @Get('/all')
-  async getAllRooms(): Promise<Rooms[]> {
-    return this.roomsService.getAllRoomsWithDetail();
-  }
 }

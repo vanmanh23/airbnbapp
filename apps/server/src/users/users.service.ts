@@ -6,12 +6,14 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/users.dto';
 import 'dotenv/config';
 import * as nodemailer from 'nodemailer';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
   private transporter;
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    private prisma: PrismaService,
+    // @InjectRepository(User) private userRepository: Repository<User>,
   ) {
     this.transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -24,23 +26,23 @@ export class UsersService {
     });
   }
   async findOne(email: string) {
-    return this.userRepository.findOne({ where: { email } });
+    return this.prisma.user.findFirst({ where: { email } });
   }
   findOneById(id: number) {
-    return this.userRepository.findOne({ where: { id } });
+    return this.prisma.user.findUnique({ where: { id } });
   }
   getAll() {
-    return this.userRepository.find();
+    return this.prisma.user.findMany();
   }
   findByEmail(email: string) {
-    return this.userRepository.findOneBy({ email });
+    return this.prisma.user.findUnique({ where: { email } });
   }
   createUser(requestBody: CreateUserDto) {
-    const user = this.userRepository.create(requestBody);
-    return this.userRepository.save(user);
+    const user = this.prisma.user.create({ data: requestBody });
+    return user;
   }
   async updateUserWithEmail(email: string, isEmailVerified: boolean) {
-    const user = await this.userRepository.findOneBy({ email });
+    const user = await this.prisma.user.findUnique({ where: { email } });
     console.log('user', user);
     if (!user) {
       throw new Error('User not found');
@@ -50,9 +52,9 @@ export class UsersService {
       throw new Error('Email already verified');
     }
     Object.assign(user, { isEmailVerified });
-    return this.userRepository.save(user);
+    return this.prisma.user.update({ where: {id: user.id}, data: user });
   }
-  async verifyEmail(email: string): Promise<void> {
+  async verifyEmail(email: string) {
     await this.updateUserWithEmail(email, true);
   }
   //

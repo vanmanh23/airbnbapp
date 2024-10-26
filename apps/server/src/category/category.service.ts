@@ -1,73 +1,65 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Category } from './category.entity';
-import { Repository } from 'typeorm';
+// import { InjectRepository } from '@nestjs/typeorm';
+// import { Category } from './category.entity';
+// import { Repository } from 'typeorm';
 import { CategoryDto } from './dto/category.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class CategoryService {
   constructor(
-    @InjectRepository(Category)
-    private categoryRepository: Repository<Category>,
+    private prisma: PrismaService,
+    // @InjectRepository(Category)
+    // private categoryRepository: Repository<Category>,
   ) {}
 
-  async getAll(): Promise<Category[]> {
-    return await this.categoryRepository.find();
+  getAll() {
+    return this.prisma.category.findMany();
   }
-  async getByTitle(title: string): Promise<Category> {
-    return await this.categoryRepository.findOneBy({ title });
+  getByTitle(title: string) {
+    return this.prisma.category.findFirst({ where: { title } });
   }
 
-  async getById(id: string): Promise<Category> {
+  getById(id: string) {
     try {
-      return await this.categoryRepository.findOneBy({ id });
+      return this.prisma.category.findFirst({ where: { id } });
     } catch (error) {
       throw new Error(error.toString());
     }
   }
-  // async getById(id: number): Promise<Category> {
-  //   try {
-  //     return await this.categoryRepository.findOneBy({ id });
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // }
 
-  async create(category: Category): Promise<Category> {
-    return await this.categoryRepository.save(category);
+  create(category: CategoryDto) {
+    return this.prisma.category.create({ data: category });
   }
 
-  async update(
-    oldCategory: Category,
+  update(
+    id: string,
+    oldCategory: CategoryDto,
     categoryupdate_value: CategoryDto,
-  ): Promise<Category> {
+  ) {
     const updatecategory = oldCategory;
     Object.keys(categoryupdate_value).forEach((key) => {
       updatecategory[key] = categoryupdate_value[key];
     });
     try {
-      return await this.categoryRepository.save(updatecategory);
+      return this.prisma.category.update({
+        where: { id },
+        data: updatecategory,
+      });
     } catch (e) {
       throw new Error(e.toString());
     }
   }
 
-  async remove(id: string): Promise<void> {
-    await this.categoryRepository.delete(id);
+  async remove(id: string){
+    await this.prisma.category.delete({
+      where: { id },});
   }
-  // async remove(id: number): Promise<void> {
-  //   await this.categoryRepository.delete(id);
-  // }
   getAllRoomsOfCategory(id: string) {
-    return this.categoryRepository.find({
+    return this.prisma.category.findUnique({
       where: { id },
-      relations: ['rooms'],
+      include: { rooms: true },
+      // relations: ['rooms'],
     });
   }
-  // getAllRoomsOfCategory(id: number) {
-  //   return this.categoryRepository.find({
-  //     where: { id },
-  //     relations: ['rooms'],
-  //   });
-  // }
 }

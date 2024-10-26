@@ -12,7 +12,7 @@ export class AuthService {
   constructor(
     private jwtService: JwtService,
     private userService: UsersService,
-    private configService: ConfigService,
+    // private configService: ConfigService,
   ) {}
 
   async register(requestBody: CreateUserDto) {

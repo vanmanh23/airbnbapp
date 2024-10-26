@@ -4,75 +4,68 @@ import { Rooms } from './rooms.entity';
 import { Repository } from 'typeorm';
 import { RoomDto } from './dto/room.dto';
 import { Category } from '../../src/category/category.entity';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class RoomsService {
   constructor(
-    @InjectRepository(Rooms)
-    private readonly roomsRepository: Repository<Rooms>,
-    @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>,
+    private prisma: PrismaService,
+    // @InjectRepository(Rooms)
+    // private readonly roomsRepository: Repository<Rooms>,
+    // @InjectRepository(Category)
+    // private readonly categoryRepository: Repository<Category>,
   ) {}
-  async getAll(): Promise<Rooms[]> {
-    return await this.roomsRepository.find();
+  getAll() {
+    return this.prisma.room.findMany();
   }
-  async getRoomById(id: string): Promise<Rooms> {
+  getRoomById(id: string) {
     try {
-      return await this.roomsRepository.findOneBy({ id });
+      return this.prisma.room.findFirst({ where: { id } });
     } catch (error) {
       throw new Error(error.toString());
     }
   }
-  // async getRoomById(id: number): Promise<Rooms> {
-  //   try {
-  //     return await this.roomsRepository.findOneBy({ id });
-  //   } catch (error) {
-  //     throw new Error(error);
-  //   }
-  // }
   getRoomandImages(id: string) {
-    return this.roomsRepository.findOne({
+    return this.prisma.room.findUnique({
       where: { id },
-      relations: ['images'],
+      include: { images: true },
+      // relations: ['images'],
     });
   }
-  // getRoomandImages(id: number) {
-  //   return this.roomsRepository.findOne({
-  //     where: { id },
-  //     relations: ['images'],
-  //   });
-  // }
-  async create(rooms: RoomDto): Promise<RoomDto> {
+  create(rooms: RoomDto) {
     try {
-      // const category = await this.categoryRepository.findOne({
-      //   where: { id: rooms.categoryId },
-      // });
-      // if (!category) {
-      //   throw new Error('Category not found');
-      // }
-      const newRoom = this.roomsRepository.create({
-        name: rooms.name,
-        price: rooms.price,
-        date: rooms.date,
-        distance: rooms.distance,
-        category: { id: rooms.categoryId },
+      // const newRoom = this.prisma.room.create({
+      return this.prisma.room.create({
+        data: {
+          name: rooms.name,
+          price: rooms.price,
+          date: rooms.date,
+          distance: rooms.distance,
+          category: {
+            connect: { id: rooms.categoryId },
+          },
+          // category: { id: rooms.categoryId }
+        },
+        // include: { category: true },
       });
-      const savedRoom = await this.roomsRepository.save(newRoom);
-      return {
-        id: savedRoom.id,
-        name: savedRoom.name,
-        price: savedRoom.price,
-        date: savedRoom.date,
-        distance: savedRoom.distance,
-        categoryId: savedRoom.category.id,
-      };
+      // const savedRoom = this.prisma.room.create({ data: newRoom });
+      // const savedRoom = this.prisma.room.findUnique({
+      //   where: { id: newRoom.id },
+      //   include: { category: true },
+      // });
       // return {
-      //   id: rooms.id,
-      //   name: rooms.name,
-      //   price: rooms.price,
-      //   date: rooms.date,
-      //   distance: rooms.distance,
-      //   categoryId: rooms.categoryId,
+      // id: savedRoom.id,
+      // name: savedRoom.name,
+      // price: savedRoom.price,
+      // date: savedRoom.date,
+      // distance: savedRoom.distance,
+      // categoryId: savedRoom.category.id,
+      //   id: newRoom.id,
+      //   name: newRoom.name,
+      //   price: newRoom.price,
+      //   date: newRoom.date,
+      //   distance: newRoom.distance,
+      //   categoryId: newRoom.category.id,
       // };
     } catch (error) {
       throw new Error(error.toString());
@@ -86,9 +79,10 @@ export class RoomsService {
   //     throw new Error(error);
   //   }
   // }
-  async getAllRoomsWithDetail(): Promise<Rooms[]> {
-    return await this.roomsRepository.find({
-      relations: ['images', 'category'],
+  getAllRoomsWithDetail() {
+    return this.prisma.room.findFirst({
+      include: { images: true, category: true },
+      // relations: ['images', 'category'],
     });
   }
 }

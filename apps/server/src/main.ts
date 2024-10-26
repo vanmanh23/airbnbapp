@@ -1,23 +1,29 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import 'dotenv/config';
 
- async function bootstrap() {
+let cachedApp = null; // Sử dụng để lưu trữ app và tránh tạo lại
+// Hàm tạo ứng dụng NestJS
+async function createApp() {
   const app = await NestFactory.create(AppModule, { cors: true });
-  // app.enableCors({
-  //   credentials: true,
-  //   origin: true,
-  // });
-  // app.use((req, res, next) => {
-  //   res.setTimeout(30 * 1000); // 30 seconds timeout
-  //   next();
-  // });
-  await app.listen(3000);
+  await app.init();
   return app;
 }
+// 
+// khi chạy trên localhost thì mở comment code này nếu deploy thì commment nó lại.
+async function bootstrap() {
+  const port = 3000;
+  const app = await createApp();
+  await app.listen(port);
+  console.log(`App is running on http://localhost:${port}`);
+}
 bootstrap();
-// Export a function as the handler
+// 
+// Hàm handler cho Vercel
 export default async function handler(req, res) {
-  const app = await bootstrap();
-  await app.init(); // Initialize the app
-  return app.getHttpAdapter().getInstance().handle(req, res); // Handle incoming requests
+  if (!cachedApp) {
+    cachedApp = await createApp(); // Khởi tạo ứng dụng nếu chưa có
+  }
+  const instance = cachedApp.getHttpAdapter().getInstance();
+  return instance(req, res); // Xử lý request
 }

@@ -7,14 +7,14 @@ export class RoomImagesController {
   constructor(private roomImagesService: RoomImagesService) {}
 
   @Get()
-  async findAll(): Promise<RoomImage[]> {
+  async findAll() {
     return this.roomImagesService.findAll();
   }
   @Post('/newimage/:id')
   async create(
     @Body('imageUrls') imageUrls: string[],
     @Param('id') id: string,
-  ): Promise<void> {
+  ) {
     await this.roomImagesService.create(imageUrls, id);
   }
 }

@@ -7,17 +7,20 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from '../auth/auth.service';
 import { UserMiddleWare } from '../middleware/user.middleware';
 import 'dotenv/config';
+import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    // TypeOrmModule.forFeature([User]),
+    PrismaModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '30h' },
     }),
   ],
-  providers: [UsersService, AuthService],
+  providers: [UsersService, AuthService, PrismaService],
   controllers: [UsersController],
   exports: [UsersService],
 })

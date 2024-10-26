@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  email          String   @unique
+  password       String
+  isEmailVerified Boolean  @default(false)
+  role           String   @default("user")
+}
+model Category {
+  id       String   @id @default(uuid())
+  icon     String
+  title    String
+  rooms    Room[]   @relation("CategoryToRoom")
+}
+model Room {
+  id        String       @id @default(uuid())
+  name      String       
+  price     BigInt
+  date      DateTime?    
+  distance  String?      
+  category  Category?    @relation("CategoryToRoom", fields: [categoryId], references: [id])
+  categoryId String?
+
+  images    RoomImage[]  @relation("RoomToImage")
+}
+model RoomImage {
+  id       Int      @id @default(autoincrement())
+  imageUrl String   
+  room     Room?    @relation("RoomToImage", fields: [roomId], references: [id], onDelete: Cascade)
+  roomId   String?
+}

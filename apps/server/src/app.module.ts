@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
-import { ItemModule } from './item/item.module';
 import { CategoryModule } from './category/category.module';
 import { RoomImagesModule } from './room-images/room-images.module';
 import { RoomsModule } from './rooms/rooms.module';
@@ -11,54 +10,17 @@ import { UserMiddleWare } from './middleware/user.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmConfigService } from './config/database';
+import { PrismaModule } from './prisma/prisma.module';
 
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-
-      TypeOrmModule.forRootAsync(
-      {
-        inject: [ConfigModule],
-        useClass: TypeOrmConfigService,
-      }),
-    // TypeOrmModule.forRootAsync({
-    //   imports: [ConfigModule],
-    //   inject: [ConfigService],
-    //   useFactory: (configService: ConfigService) => ({
-    //     type: 'mysql',
-    //     url: configService.get<string>('DATABASE_URL'),
-    //     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    //     synchronize: true,
-    //     connectTimeout: 20000, // Increase timeout to 20 seconds
-    //     acquireTimeout: 20000, // Increase timeout to 20 seconds
-        // logging: true,
-        // connectTimeout: 30000,
-        // type: 'mysql',
-        // host: configService.get<string>('DATABASE_HOST'),
-        // port: 3306,
-        // username: configService.get<string>('DATABASE_USERNAME'),
-        // password: configService.get<string>('DATABASE_PASSWORD'),
-        // database: configService.get<string>('DATABASE_NAME'),
-        // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-        // synchronize: true,
-        // 
-        // extra: {
-        //   connectionLimit: 10, // Max number of connections in the pool
-        //   queueLimit: 0, // Unlimited queued requests
-        //   waitForConnections: true, // Wait if all connections are in use
-        //   connectTimeout: 10000,
-        // },
-    //   }),
-    // }),
-    ItemModule,
     CategoryModule,
     RoomsModule,
     RoomImagesModule,
     UsersModule,
     AuthModule,
+    PrismaModule,
   ],
   providers: [AuthService],
 })
