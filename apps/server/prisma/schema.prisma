@@ -18,15 +18,15 @@ model User {
   role           String   @default("user")
 }
 model Category {
-  id       String   @id @default(uuid())
+  id       String   @id @default(cuid())
   icon     String
   title    String
   rooms    Room[]   @relation("CategoryToRoom")
 }
 model Room {
-  id        String       @id @default(uuid())
+  id        String       @id @default(cuid())
   name      String       
-  price     BigInt
+  price     Int
   date      DateTime?    
   distance  String?      
   category  Category?    @relation("CategoryToRoom", fields: [categoryId], references: [id])

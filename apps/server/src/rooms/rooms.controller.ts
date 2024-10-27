@@ -8,8 +8,8 @@ export class RoomsController {
   constructor(private roomsService: RoomsService) {}
 
   @Get()
-  async getAll(){
-    return await this.roomsService.getAll();
+  getAll(){
+    return this.roomsService.getAll();
   }
   @Get('room/:id')
   getRoomById(@Param() params) {
@@ -19,8 +19,8 @@ export class RoomsController {
   async create(@Body() room: RoomDto) {
     return await this.roomsService.create(room);
   }
-  // @Get('/all')
-  // async getAllRooms() {
-  //   return this.roomsService.getAllRoomsWithDetail();
-  // }
+  @Get('/all')
+  async getAllRooms() {
+    return this.roomsService.getAllRoomsWithDetail();
+  }
 }

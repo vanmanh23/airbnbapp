@@ -39,7 +39,7 @@ export class RoomsService {
         data: {
           name: rooms.name,
           price: rooms.price,
-          date: rooms.date,
+          date: new Date(rooms.date),
           distance: rooms.distance,
           category: {
             connect: { id: rooms.categoryId },
@@ -80,7 +80,7 @@ export class RoomsService {
   //   }
   // }
   getAllRoomsWithDetail() {
-    return this.prisma.room.findFirst({
+    return this.prisma.room.findMany({
       include: { images: true, category: true },
       // relations: ['images', 'category'],
     });

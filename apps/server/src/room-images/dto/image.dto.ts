@@ -1,5 +1,5 @@
-export class RoomDto {
-  id?: number;
-  url: string;
-  roomId: number;
+export class RoomImageDto {
+  id ?: number;
+  roomId: string;
+  imageUrls: string[]; 
 }

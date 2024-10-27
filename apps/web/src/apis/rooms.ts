@@ -8,7 +8,8 @@ export interface Room {
     distance: string
     images: [
       id: number,
-      imageUrl: string
+      imageUrl: string,
+      roomId?: string
     ]
   }
   export interface RoomEntity {

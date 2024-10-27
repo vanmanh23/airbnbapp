@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RoomImage } from './room-images.entity';
 import { Repository } from 'typeorm';
@@ -18,14 +18,19 @@ export class RoomImagesService {
   findAll() {
     return this.prisma.roomImage.findMany();
   }
-  create(imageUrls: string[], roomId: string) {
+  async create(imageUrls: string[], roomId: string) {
     const room = this.prisma.room.findUnique({ where: { id: roomId } });
     if (!room) {
       throw new Error('Room not found');
     }
-    const roomImages = imageUrls.map((url) => {
-      return { imageUrl: url, room: room };
-    });
-    this.prisma.roomImage.createMany({ data: roomImages });
+    const roomImages = imageUrls.map((url) => ({
+      imageUrl: url,
+      roomId: roomId,
+    }));
+    await this.prisma.roomImage.createMany({ data: roomImages });
+    return {
+      status: HttpStatus.CREATED,
+      message: 'Room images created successfully.',
+    };
   }
 }

@@ -7,7 +7,8 @@ interface CarouselProps {
   images: [
     {
       id: number,
-      imageUrl: string
+      imageUrl: string,
+      roomId?: string
     }
   ]
   loop?: boolean

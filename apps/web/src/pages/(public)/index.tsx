@@ -46,7 +46,8 @@ export default function Component() {
     queryKey: ["rooms"],
     queryFn: () => fetchRoomsWithCategory(),
     initialData: [],
-  });
+  })
+  console.log("roomsQuery: ", roomsQuery.data);
   const test = localStorage.getItem("token");
   console.log("test acces token: ", test);
   return (

@@ -2,31 +2,38 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom'
-import debounce from 'lodash.debounce';
 import HeaderRoom from './_components/HeaderRoom';
 // import { VerifyEmailProvider } from '@/utils/VerifyEmailContext';
 
 export default function Component() {
   const [isOneTwelfthScrolled, setIsOneTwelfthScrolled] = useState(false);
+
   useEffect(() => {
-    const handleScroll = debounce(() => {
+    let timeoutId: NodeJS.Timeout; // Biến để lưu timeout ID
+
+    const handleScroll = () => {
       const scrollTop = window.scrollY;
       const documentHeight = document.documentElement.scrollHeight;
+      const shouldBeScrolled = scrollTop >= documentHeight / 12;
 
-      if (scrollTop >= documentHeight / 12) {
-        setIsOneTwelfthScrolled(true);
-      } else {
-        setIsOneTwelfthScrolled(false);
+      // Thiết lập độ trễ khi cập nhật trạng thái
+      if (shouldBeScrolled !== isOneTwelfthScrolled) {
+        clearTimeout(timeoutId); // Xóa timeout cũ
+        timeoutId = setTimeout(() => {
+          setIsOneTwelfthScrolled(shouldBeScrolled);
+        }, 200); // Đặt độ trễ ở đây (200 ms)
       }
-    }, 100); // Chỉ gọi hàm sau 100ms kể từ lần cuối cùng
+    };
 
     window.addEventListener('scroll', handleScroll);
+    
     return () => {
+      clearTimeout(timeoutId); // Hủy timeout nếu component bị hủy
       window.removeEventListener('scroll', handleScroll);
-      handleScroll.cancel(); // Hủy bỏ debounce nếu component bị hủy
     };
-  }, []);
+  }, [isOneTwelfthScrolled]);
 
+  
   const currentPath = window.location.pathname;
   return (
     <>
