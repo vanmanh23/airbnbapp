@@ -12,7 +12,6 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmConfigService } from './config/database';
 import { PrismaModule } from './prisma/prisma.module';
 
-
 @Module({
   imports: [
     CategoryModule,
