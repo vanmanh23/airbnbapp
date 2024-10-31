@@ -6,10 +6,17 @@ export interface Room {
     price: number
     date: string
     distance: string
+    // images: [
+    //   id: number,
+    //   imageUrl: string,
+    //   roomId?: string
+    // ]
     images: [
-      id: number,
-      imageUrl: string,
-      roomId?: string
+      {
+        id: number,
+        imageUrl: string,
+        roomId?: string
+      }
     ]
   }
   export interface RoomEntity {

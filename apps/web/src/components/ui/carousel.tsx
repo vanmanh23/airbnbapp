@@ -3,6 +3,7 @@ import { LazyMotion, ValueAnimationTransition, animate, domAnimation, m, useMoti
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+
 interface CarouselProps {
   images: [
     {
@@ -11,6 +12,11 @@ interface CarouselProps {
       roomId?: string
     }
   ]
+  // images: [
+  //   id: number,
+  //   imageUrl: string,
+  //   roomId?: string
+  // ]
   loop?: boolean
   autoplay?: boolean
   autoplayDelay?: number
