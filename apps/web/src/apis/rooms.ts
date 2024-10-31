@@ -24,7 +24,7 @@ export interface Room {
     roomId: string;
   }
 
-  export const fetchRooms = async (categoryId: string): Promise<Room[]> => {
+  export const fetchRooms = async (categoryId: string) => {
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/rooms/room/${categoryId}`)
     const rooms = await res.data
     return rooms

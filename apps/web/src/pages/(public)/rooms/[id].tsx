@@ -1,14 +1,13 @@
 import { useParams } from "@/router";
 import PriceCalculator from "./_components/PriceCalculator";
-// import { useQuery } from "@tanstack/react-query";
-// import { fetchRoom } from "@/apis/rooms";
 import { cn } from "@/utils/cn";
-// import { Skeleton } from "@/components/ui/skeleton";
-
-import { Roomsdata } from "@/data/roomdata";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { ArrowUpFromLine, ChevronLeft, Grip, Heart, Share } from "lucide-react";
 import RoomDetails from "./_components/RoomDetails";
+import { useQuery } from "@tanstack/react-query";
+import { fetchRooms } from "@/apis/rooms";
+import { Skeleton } from "@/components/ui/skeleton";
+// import { set } from "date-fns";
 
 const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState<boolean>(false);
@@ -29,13 +28,15 @@ const useMediaQuery = (query: string): boolean => {
 };
 
 export default function Component() {
-  const [data, setData] = useState<string[] | undefined>([]);
   const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams("/rooms/:id");
-  useEffect(() => {
-    const rooms = Roomsdata.find((room) => room.id === id);
-    setData(rooms?.images);
-  }, [data]);
+
+  const roomImagesQuery = useQuery({
+    queryKey: ["rooms", id],
+    queryFn: () => fetchRooms(id),
+    initialData: [],
+  })
+  console.log("roomImages: ", roomImagesQuery.data?.images);
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -64,24 +65,54 @@ export default function Component() {
   };
 
   const nextImage = () => {
-    if (data) {
+    if (roomImagesQuery.data?.images) {
       setCurrentIndex((prevIndex) =>
-        prevIndex === data.length - 1 ? 0 : prevIndex + 1
+        prevIndex === roomImagesQuery.data?.images.length - 1 ? 0 : prevIndex + 1
       );
     }
   };
 
   const prevImage = () => {
-    if (data) {
+    if (roomImagesQuery.data?.images) {
       setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? data.length - 1 : prevIndex - 1
+        prevIndex === 0 ? roomImagesQuery.data?.images.length - 1 : prevIndex - 1
       );
     }
   };
 
+  if (roomImagesQuery.isLoading) {
+  return  (
+    <div>
+      <Skeleton className="h-8 w-3/5"/>
+      <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2">
+      <Skeleton className="h-96  col-span-2 row-span-2" />
+      <Skeleton className="h-full w-full" />
+      <Skeleton className="h-full w-full" />
+      <Skeleton className="h-full w-full" />
+      <Skeleton className="h-full w-full" />
+    </div>
+    <div className="flex justify-between mt-10">
+        <div>
+          <Skeleton className="h-8 w-96"/>
+          <Skeleton className="h-8 w-40 mt-4"/>
+        </div>
+        <div className="flex flex-row gap-28">
+          <div>
+            <Skeleton className="h-12 w-12 rounded-full "/>
+          </div>
+          <div>
+          <Skeleton className="h-8 w-40"/>
+          <Skeleton className="h-8 w-96 mt-4"/>
+          </div>
+        </div>
+    </div>
+    </div>
+  )
+}
+
   return (
-    <div className="relative">
-      <div className="md:flex justify-between hidden">
+    <div className={`${isOpen && "absolute -top-10 left-0 w-full h-full"}`}>
+      {!isOpen && <div className="md:flex justify-between hidden">
         <h1 className="flex gap-2 text-2xl font-medium">
           Flower Dam Garden (Flower Dam Academy)
         </h1>
@@ -95,7 +126,7 @@ export default function Component() {
             <p className="font-medium underline text-sm">Save</p>
           </div>
         </div>
-      </div>
+      </div>}
       {!isOpen ? (
         <div
           className="carousel-container w-full h-72 md:h-full overflow-hidden relative"
@@ -108,10 +139,10 @@ export default function Component() {
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {isMdScreen
-              ? data?.slice(0, 5).map((image, index) => (
+              ? roomImagesQuery.data?.images?.slice(0, 5).map((image: { imageUrl: string }, index: number) => (
                   <img
                     key={index}
-                    src={image}
+                    src={image.imageUrl}
                     className={cn({
                       "col-span-2 row-span-2": index === 0,
                       "rounded-s-xl": index === 0,
@@ -132,9 +163,9 @@ export default function Component() {
                     })}
                   />
                 ))
-              : data?.map((image, index) => (
+              : roomImagesQuery.data?.images?.map((image: { imageUrl: string }, index: number) => (
                   <div className="min-w-full box-border h-72">
-                    <img key={index} src={image} className="w-full h-72"/>
+                    <img key={index} src={image.imageUrl} className="w-full h-72"/>
                   </div>
                 ))}
             <div
@@ -147,7 +178,7 @@ export default function Component() {
           </div>
         </div>
       ) : (
-        <div className="absolute -top-5 left-0 p-10 z-50 bg-white mt-6 w-full flex flex-col justify-center gap-5 items-center">
+        <div className="relative left-0 right-0 h-fit z-50 overflow-y-visible  p-10 bg-white mt-6  flex flex-col justify-center gap-5 items-center">
           <div className="sticky top-0 left-0 flex flex-row justify-between items-center w-full">
             <div
               onClick={handleOpen}
@@ -167,14 +198,14 @@ export default function Component() {
             </div>
           </div>
           <div className="grid grid-cols-1  gap-2">
-            {data?.map((image, index) => (
-              <img key={index} src={image} />
+            {roomImagesQuery.data?.images?.map((image: { imageUrl: string }, index: number) => (
+              <img key={index} src={image.imageUrl} />
             ))}
           </div>
         </div>
       )}
 
-      <div className="relative min-h-screen px-6 sm:px-0 md:px-0 flex justify-between mt-4 md:mt-8 gap-20">
+      { !isOpen &&<div className="relative min-h-screen px-6 sm:px-0 md:px-0 flex justify-between mt-4 md:mt-8 gap-20">
         <div className="w-full h-full md:w-2/3">
           <RoomDetails />
         </div>
@@ -184,46 +215,8 @@ export default function Component() {
         </div>
           
         </div>
-      </div>
+      </div>}
       
     </div>
   );
 }
-
-// setData(roomdetail?.images ?? []);
-// console.log("roomdetail: ", rooms?.images);
-
-// const roomQuery = useQuery({
-//   queryKey: ['rooms', id],
-//   queryFn: () => fetchRoom(id),
-//   initialData: [],
-// })
-// if (roomQuery.isLoading) {
-//   return  (
-//     <div>
-//       <Skeleton className="h-8 w-3/5"/>
-//       <div className="mt-6 grid grid-cols-4 grid-rows-2 gap-2">
-//       <Skeleton className="h-96  col-span-2 row-span-2" />
-//       <Skeleton className="h-full w-full" />
-//       <Skeleton className="h-full w-full" />
-//       <Skeleton className="h-full w-full" />
-//       <Skeleton className="h-full w-full" />
-//     </div>
-//     <div className="flex justify-between mt-10">
-//         <div>
-//           <Skeleton className="h-8 w-96"/>
-//           <Skeleton className="h-8 w-40 mt-4"/>
-//         </div>
-//         <div className="flex flex-row gap-28">
-//           <div>
-//             <Skeleton className="h-12 w-12 rounded-full "/>
-//           </div>
-//           <div>
-//           <Skeleton className="h-8 w-40"/>
-//           <Skeleton className="h-8 w-96 mt-4"/>
-//           </div>
-//         </div>
-//     </div>
-//     </div>
-//   )
-// }

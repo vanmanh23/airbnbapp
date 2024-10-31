@@ -47,9 +47,9 @@ export default function Component() {
     queryFn: () => fetchRoomsWithCategory(),
     initialData: [],
   })
-  console.log("roomsQuery: ", roomsQuery.data);
-  const test = localStorage.getItem("token");
-  console.log("test acces token: ", test);
+  // console.log("roomsQuery: ", roomsQuery.data);
+  // const test = localStorage.getItem("token");
+  // console.log("test acces token: ", test);
   return (
     <>
       <div className="mb-4 flex ">
