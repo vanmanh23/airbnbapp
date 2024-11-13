@@ -29,6 +29,8 @@ module.exports = {
         "180": "720px",
       },
       colors: {
+        "text-primary": "#222222",
+        "text-secondary": "#6A6A6A",
         "main-color": "#FF385C",
         "color-host": "#e51e4f",
         "secondary-color": "#6a6a6a",

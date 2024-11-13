@@ -99,7 +99,7 @@ export default function Carousel({
       <button
         onClick={handlePrev}
         disabled={!loop && index === 0}
-        className="absolute left-4 top-2/4 hidden h-6 select-none place-items-center rounded-full bg-white text-muted-foreground  transition-all hover:scale-105 group-hover:grid"
+        className="absolute left-4 top-2/4 md:hidden flex h-6 select-none place-items-center rounded-full bg-white text-muted-foreground  transition-all hover:scale-105 group-hover:grid"
       >
         {
           images[index] !== images.at(0) &&  <ChevronLeft />
@@ -108,7 +108,7 @@ export default function Carousel({
       <button
         onClick={handleNext}
         disabled={!loop && index === images.length - 1}
-        className="absolute right-4 top-2/4 hidden h-6 select-none place-items-center rounded-full bg-white text-muted-foreground transition-all hover:scale-105 group-hover:grid"
+        className="absolute right-4 top-2/4 md:hidden flex h-6 select-none place-items-center rounded-full bg-white text-muted-foreground transition-all hover:scale-105 group-hover:grid"
       >
         {
           images[index] !== images.at(images.length - 1) &&  <ChevronRight />
