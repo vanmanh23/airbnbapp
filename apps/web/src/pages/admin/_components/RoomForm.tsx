@@ -1,4 +1,5 @@
 import { Category, fetchCategories } from "@/apis/categories";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
 
@@ -32,7 +33,6 @@ export interface IFormValues {
 export default function RoomForm({ onSubmit }: Props) {
     const [category, setCategory] = useState<Category[]>([]);
     const { register, handleSubmit } = useForm<IFormValues>();
-    // const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     useEffect(() => {
       const fetchData = async () => {
         const res = await fetchCategories();
@@ -40,24 +40,9 @@ export default function RoomForm({ onSubmit }: Props) {
       }
       fetchData();
     }, [])
-    // 
-     // Xử lý khi người dùng chọn ảnh
-  // const handleImageChange = () => {
-  //   const files = watch('imageUrls');
-  //   if (files && files.length > 0) {
-  //     const previews = Array.from(files).map((file) => URL.createObjectURL(file));
-  //     setImagePreviews(previews);
-  //   }
-  // };
-   // Dọn dẹp URLs khi component bị huỷ
-  //  useEffect(() => {
-  //   return () => {
-  //     imagePreviews.forEach((url) => URL.revokeObjectURL(url));
-  //   };
-  // }, [imagePreviews]);
   return (
     <div>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col md:space-y-4 space-y-2">
                   <Input type="text" label="name" register={register} required />
                   <select {...register("category", { required: true })} defaultValue="" >
                     {category.map((item) => (
@@ -69,7 +54,8 @@ export default function RoomForm({ onSubmit }: Props) {
                   <Input type="number" label="distance" register={register} required />
                   <Input type="file" label="imageUrls" register={register} required multiple accept="image/*"/>
 
-                  <input type="submit" />
+                  {/* <input type="submit" /> */}
+                  <Button type="submit">Submit</Button>
                 </form>
     </div>
   )

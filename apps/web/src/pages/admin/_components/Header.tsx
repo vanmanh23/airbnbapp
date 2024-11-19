@@ -17,12 +17,12 @@ export default function Header({ callback }: HeaderProps){
 
   return (
     <div className="flex flex-row items-center justify-between px-3 py-5">
-      <div className="flex justify-between items-center max-w-md w-full">
+      <div className="flex justify-between items-center max-w-md w-full gap-3">
         <div className="border-r-0 ">
           <AlignJustify className="cursor-pointer" onClick={handleClick}/>
         </div>
         <div className="flex w-full max-w-sm items-center space-x-2">
-          <Input type="email" placeholder="Search" className="h-8"/>
+          <Input type="email" placeholder="Search" className="h-8 "/>
           <button type="submit" className=""><Search className="text-primary"                                   /></button>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default function Header({ callback }: HeaderProps){
         <div className="flex items-center flex-row gap-4">
           <div className="flex items-center space-x-2 w-10 h-10 rounded-full bg-primary">
          </div>
-          <div className="flex flex-col items-center">
+          <div className="md:flex flex-col items-center hidden">
             <div>name</div>
             <div>chuc vu</div>
           </div>

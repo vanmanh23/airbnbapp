@@ -14,7 +14,7 @@ export default function Component() {
   };
   return (
     <div className='flex flex-row'>
-        <div>
+        <div className='md:flex hidden'>
           <Sidebar toggle={onclicked}/>  
         </div>       
         <div className='flex flex-col w-full'>
