@@ -7,11 +7,14 @@ import {
 // import { useEffect, useState } from "react";
 // import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
 import RoomForm, { IFormValues } from "./RoomForm";
-import {  createImagesOfRoom, createRoom } from "@/apis/rooms";
+import {  createImagesOfRoom, createRoom, GetAllRooms } from "@/apis/rooms";
 import { Toaster, toast } from "sonner";
 import { useState } from "react";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
+import { useQuery } from "@tanstack/react-query";
+// import { Skeleton } from "@/components/ui/skeleton";
 
-// import { useNavigate } from "react-router-dom";
 
 export default function RoomList() {
   const [isDialogOpen, setIsDialogOpen] = useState(false); 
@@ -38,6 +41,13 @@ export default function RoomList() {
 
       }
     }
+    const { data, isFetched} = useQuery({
+      queryKey: ["getallrooms"],
+      queryFn: () => GetAllRooms(),
+      initialData: [],
+      enabled: true,
+    }) 
+    // if (!isFetched) return <div>Loading...</div>;
   return (
     <div>
       <Toaster />
@@ -57,9 +67,9 @@ export default function RoomList() {
         </div>
       </div>
       {/*  */}
-      <div>
-        {/* <Button size="lg" onClick={() => toast.success("Room created successfully!")}>Add hello</Button> */}
-      </div>
+      <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={data} isLoading={isFetched}/>
+    </div>
     </div>
   );
 }

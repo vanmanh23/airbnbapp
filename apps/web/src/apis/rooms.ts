@@ -6,11 +6,6 @@ export interface Room {
     price: number
     date: string
     distance: string
-    // images: [
-    //   id: number,
-    //   imageUrl: string,
-    //   roomId?: string
-    // ]
     images: [
       {
         id: number,
@@ -29,6 +24,12 @@ export interface Room {
   export interface ImagesEntity {
     imageUrl: string[]
     roomId: string;
+  }
+
+  export const GetAllRooms = async () => {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/rooms`)
+    const rooms = await res.data
+    return rooms
   }
 
   export const fetchRooms = async (categoryId: string) => {

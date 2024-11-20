@@ -23,4 +23,12 @@ export class RoomsController {
   async getAllRooms() {
     return this.roomsService.getAllRoomsWithDetail();
   }
+  @Get('/delete/:id')
+  async deleRoom(@Param() params : { id: string }) {
+    return this.roomsService.deleteRoom(params.id);
+  }
+  @Post('/update/:id')
+  updateRoomWithImages( @Param('id') id: string, @Body() data: RoomDto) {
+    return this.roomsService.updateRoom(id, data);
+  }
 }

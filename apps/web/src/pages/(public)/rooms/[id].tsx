@@ -36,8 +36,6 @@ export default function Component() {
     queryFn: () => fetchRooms(id),
     initialData: [],
   })
-  console.log("roomImages: ", roomImagesQuery.data?.images);
-
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -79,7 +77,6 @@ export default function Component() {
       );
     }
   };
-
   if (roomImagesQuery.isLoading) {
   return  (
     <div>

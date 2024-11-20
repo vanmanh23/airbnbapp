@@ -10,6 +10,7 @@
     "dev": "nest start --watch",
     "postinstall": "prisma generate",
     "build": "prisma generate && nest build",
+    "deploy-vercel": "vercel --prod",
     "start:debug": "nest start --debug --watch",
     "preview": "node dist/main",
     "lint": "tslint -p tsconfig.json -c tslint.json",
