@@ -58,7 +58,7 @@ export class CategoryService {
   getAllRoomsOfCategory(id: string) {
     return this.prisma.category.findUnique({
       where: { id },
-      include: { rooms: true },
+      include: { rooms: { include: { images: true }} },
       // relations: ['rooms'],
     });
   }

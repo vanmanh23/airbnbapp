@@ -8,9 +8,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 interface Props {
   categories: Category[]
   isLoading: boolean
+  getCategory: (id: number) => void
 }
 
-export default function CategoryList({ categories, isLoading }: Props) {
+export default function CategoryList({ categories, isLoading, getCategory }: Props) {
   const [searchParams] = useSearchParams()
   const categoryTag = searchParams.get('category_tag')
   if(isLoading) {
@@ -27,6 +28,7 @@ export default function CategoryList({ categories, isLoading }: Props) {
       to={`/?category_tag=${category.id}`}
       key={category.id}
       className="h-13 group flex w-fit min-w-fit cursor-pointer flex-col items-center"
+      onClick={() => getCategory(category.id)}
     >
       <img
         src={category.icon}

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { RoomsService } from './rooms.service';
 import { Rooms } from './rooms.entity';
 import { RoomDto } from './dto/room.dto';
@@ -23,7 +23,7 @@ export class RoomsController {
   async getAllRooms() {
     return this.roomsService.getAllRoomsWithDetail();
   }
-  @Get('/delete/:id')
+  @Delete('/delete/:id')
   async deleRoom(@Param() params : { id: string }) {
     return this.roomsService.deleteRoom(params.id);
   }

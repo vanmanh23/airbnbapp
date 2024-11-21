@@ -69,3 +69,15 @@ export interface Room {
       throw error; // Nên ném lỗi để xử lý ngoại lệ bên ngoài
     }
   }
+  export const deleteRoom = async (roomId: string): Promise<void> => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/rooms/delete/${roomId}`)
+    } catch (error) {
+      console.log(error)
+      throw new Error(`Failed to delete room ${roomId}`)     
+    }
+  }
+  export const fetchRoomAllowCategory = async (categoryId: number) => {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/categories/rooms/${categoryId}`)
+      return res.data.rooms
+  }

@@ -2,13 +2,14 @@ import CategoryList from "./_components/CategoryLish";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import RoomList from "./_components/RoomList";
-import { useContext, useRef } from "react";
-// import { Roomsdata } from '@/data/roomdata'
-import { fetchCategories, fetchRoomsWithCategory } from "@/apis/categories";
+import { useContext, useRef, useState } from "react";
+import { fetchCategories } from "@/apis/categories";
 import { useQuery } from "@tanstack/react-query";
 import { VerifyEmailContext } from "@/utils/VerifyEmailContext";
 import { toast } from "sonner";
+import { fetchRoomAllowCategory } from "@/apis/rooms";
 export default function Component() {
+  const [getCategory, setCategory] = useState(1);
   const categoryListRef = useRef<HTMLDivElement>(null);
   const context = useContext(VerifyEmailContext);
   if (!context) {
@@ -42,10 +43,15 @@ export default function Component() {
     initialData: [],
   });
   const roomsQuery = useQuery({
-    queryKey: ["rooms"],
-    queryFn: () => fetchRoomsWithCategory(),
+    queryKey: ["rooms", getCategory],
+    queryFn: () => fetchRoomAllowCategory(getCategory),
     initialData: [],
   })
+  const handleGetCategory  = (id: number) => {
+    setCategory(id);
+  }
+  console.log("getCategory:",getCategory);
+  console.log("fetchRoomAllowCategory:",roomsQuery);
   return (
     <>
       <div className="mb-4 flex">
@@ -62,6 +68,7 @@ export default function Component() {
           <CategoryList
             categories={categoriesQuery.data}
             isLoading={categoriesQuery.isFetching}
+            getCategory={handleGetCategory}
           />
         </div>
         <div

@@ -4,8 +4,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// import { useEffect, useState } from "react";
-// import { Path, useForm, UseFormRegister, SubmitHandler } from "react-hook-form";
 import RoomForm, { IFormValues } from "./RoomForm";
 import {  createImagesOfRoom, createRoom, GetAllRooms } from "@/apis/rooms";
 import { Toaster, toast } from "sonner";
@@ -13,15 +11,16 @@ import { useState } from "react";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { useQuery } from "@tanstack/react-query";
-// import { Skeleton } from "@/components/ui/skeleton";
-
 
 export default function RoomList() {
   const [isDialogOpen, setIsDialogOpen] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
     const onSubmitForm = async (data: IFormValues) => {
-      const imageURLs = Array.from(data.imageUrls).map((file) => URL.createObjectURL(file));
-      // console.log("data sdss", imageURLs);
+      setIsLoading(true); // Start loading
+      // const imageURLs = Array.from(data.imageUrls).map((file) => URL.createObjectURL(file));
       try {
+        const imageFiles = Array.from(data.imageUrls);
+        const imageURLs = imageFiles.map((file) => URL.createObjectURL(file)); // Tạo blob URL
       const res = await createRoom({ 
         categoryId: data.category,
         name: data.name,
@@ -33,12 +32,13 @@ export default function RoomList() {
         await createImagesOfRoom({ imageUrl: imageURLs, roomId: res.data.id });
         toast.success("Room created successfully!", {className: "#2ecc71"});
         setIsDialogOpen(false);
-        console.log("Room created successfully!");
+        window.location.reload();
        }
       } catch (error) {
         console.log(error);
         toast.error("Failed to create the room. Please try again.", {className: "#e74c3c"});
-
+      } finally {
+        setIsLoading(false); // Stop loading
       }
     }
     const { data, isFetched} = useQuery({
@@ -47,7 +47,6 @@ export default function RoomList() {
       initialData: [],
       enabled: true,
     }) 
-    // if (!isFetched) return <div>Loading...</div>;
   return (
     <div>
       <Toaster />
@@ -60,7 +59,7 @@ export default function RoomList() {
             </DialogTrigger>
             <DialogContent className="w-fit md:h-fit h-full p-3">
               <div className="p-6">
-                <RoomForm onSubmit={onSubmitForm}/>
+                <RoomForm onSubmit={onSubmitForm} isLoading={isLoading}/>
               </div>
             </DialogContent>
           </Dialog>
