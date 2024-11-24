@@ -6,8 +6,8 @@ Airbnb clone is a website inspired by the Airbnb website, it is built with React
 ## Image of the website
 ### Client site
 ![Airbnb Clone](https://github.com/vanmanh23/airbnbapp/blob/main/apps/web/public/homepage.png?raw=true)
+
 ![Airbnb Clone](https://github.com/vanmanh23/airbnbapp/blob/main/apps/web/public/roompage.png?raw=true)
-![Airbnb Clone](https://github.com/vanmanh23/quiz-app/blob/main/pictures/imagesOfApp/img3.png)
 
 ### Admin web
 ![Airbnb Clone Admin](https://github.com/vanmanh23/airbnbapp/blob/main/apps/web/public/adminsite.png?raw=true)
